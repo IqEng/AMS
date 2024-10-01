@@ -1,0 +1,8 @@
+﻿User-agent: *
+Disallow: /bin/
+Disallow: /fonts/
+Disallow: /Content/
+Disallow: /Images/
+Disallow: /Scripts/
+Disallow: /App_Start/
+Sitemap: https://asp-hosting.iq-testlabs.com/Web.sitemap

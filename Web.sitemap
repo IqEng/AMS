@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+	<siteMapNode url="~/Default.aspx" title="Home"  description="This is the AMS Home page, users able to see summary of the Ad profiles">
+		<siteMapNode url="~/Login.aspx" title="About"  description="This is the AMS Login page"></siteMapNode>
+		<siteMapNode url="~/Register.aspx" title="About"  description="This is the AMS User registration page"></siteMapNode>
+		<siteMapNode url="~/Dashboard.aspx" title="Profile"  description="This is the AMS Ad Management dashboard page"></siteMapNode>
+		<siteMapNode url="~/Profile.aspx" title="Profile"  description="This is the AMS User profile page"></siteMapNode>
+		<siteMapNode url="~/Contact_us.aspx" title="Contact"  description="This is the AMS Contact us page"></siteMapNode>
+		<siteMapNode url="~/Privacy_Policy.aspx" title="Privacy Policy"  description="This is the AMS Privacy Policy page"></siteMapNode>
+		<siteMapNode url="~/Terms_and_Conditions.aspx" title="Terms_and_Conditions"  description="This is the AMS Terms and Conditions page"></siteMapNode>
+</siteMapNode>
+</siteMap>

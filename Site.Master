@@ -1,0 +1,593 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="AMS.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - AMS</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="Images/AMS.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-size: 16px;
+            background-color: #121212;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .dashboard-square {
+            background-color: OrangeRed;
+            border-radius: 10px;
+            height: 250px;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+            .dashboard-square:hover {
+                transform: scale(1.05) rotate(3deg);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .dashboard-square:active {
+                background-color: #B22222;
+                opacity: 0.8;
+            }
+
+        .dashboard-icon {
+            font-size: 60px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .dashboard-description {
+            font-size: 16px;
+            color: #FFFFFF;
+        }
+
+        .dashboard-square a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            padding: 20px;
+        }
+
+            .dashboard-square a::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.2);
+                transition: opacity 0.3s ease;
+                opacity: 0;
+            }
+
+        .dashboard-square:hover a::before {
+            opacity: 1;
+        }
+
+        .blurred-background {
+        }
+
+            .blurred-background::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-image: inherit;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                filter: blur(5px);
+                z-index: 1;
+            }
+
+        .dashboard-section {
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            /*border-radius: 10px;
+            background-color: #1E1E1E;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);*/
+            background-color: transparent;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .dashboard-item {
+            padding: 20px;
+            background-color: #252525;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            width: fit-content;
+            min-width: 42%;
+        }
+
+            .dashboard-item h4 {
+                font-size: 24px;
+                color: OrangeRed;
+            }
+
+        .left-content {
+            flex: 1 1 60%;
+            padding-right: 20px;
+        }
+
+        .right-content {
+            flex: 1 1 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .right-content img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 10px;
+            }
+
+        .grid-section {
+            margin-top: 30px;
+        }
+
+        .section-header {
+            font-size: 28px;
+            font-weight: bold;
+            color: OrangeRed;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .centered-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 40px;
+            margin-top: 0px;
+            width: 100%;
+        }
+
+        .centered-square {
+            background-color: Highlight;
+            border-radius: 10px;
+            height: 250px;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+            .centered-square:hover {
+                transform: scale(1.05) rotate(3deg);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .centered-square:active {
+                background-color: #B22222;
+                opacity: 0.8;
+            }
+
+        .form-control {
+            background-color: #333333;
+            border: 1px solid #555555;
+            color: #FFFFFF;
+            padding: 10px;
+            border-radius: 5px;
+            height: auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                color: #FFFFFF;
+            }
+
+        .btn-primary {
+            background-color: OrangeRed;
+            border: none;
+            padding: 10px 20px;
+            color: #FFFFFF;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+            .btn-primary:hover {
+                background-color: darkred;
+            }
+
+        .table {
+            width: 100%;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+        }
+
+        .table-bordered {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background-color: #1c1c1c;
+            color: white;
+            border-radius: 10px;
+        }
+
+            .table-bordered th, .table-bordered td {
+                /*border: 1px solid #333;*/
+                padding: 12px 15px;
+            }
+
+            .table-bordered th {
+                background-color: #333;
+                color: OrangeRed;
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+
+            .table-bordered tr:nth-child(even) {
+                background-color: #2b2b2b;
+            }
+
+            .table-bordered tr:hover {
+                background-color: #444;
+            }
+
+        .panel-header {
+            font-size: 26px;
+            font-weight: bold;
+            color: OrangeRed;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .main-content {
+            color: #fff;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar-link {
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #121212;
+            /*border-bottom: 1px solid orangered;*/
+            padding: 8px 12px;
+        }
+
+        .navbar-header .navbar-brand img {
+            margin-right: 5px;
+            left: 15px;
+            /*position: absolute;*/
+        }
+
+        .navbar-nav > li > a {
+            color: orangered;
+            padding: 15px;
+        }
+
+            .navbar-nav > li > a .glyphicon {
+                margin-right: 5px;
+                color: orangered;
+            }
+
+            .navbar-nav > li > a:hover {
+                color: white;
+                background-color: orangered;
+                border-radius: 5px;
+            }
+
+        .navbar-toggle {
+            background-color: orangered;
+            border-radius: 5px;
+        }
+
+            .navbar-toggle .icon-bar {
+                background-color: white;
+                text-align: center;
+            }
+
+        .navbar-collapse.collapse.in {
+            text-align: left;
+        }
+
+        .navbar-nav {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
+
+            .navbar-nav li:last-child {
+                margin-left: auto;
+            }
+
+            .navbar-nav li {
+                display: contents;
+                margin: 5px;
+            }
+
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: block;
+            }
+
+                .navbar-nav > li {
+                    margin: 0;
+                }
+
+            .toggle-btn {
+                display: block;
+                margin-left: 20px;
+            }
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #FFFFFF;
+        }
+
+            .dark-mode .dashboard-section {
+                background-color: transparent;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .dark-mode .dashboard-item {
+                background-color: #252525;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+        .light-mode {
+            background-color: whitesmoke;
+            color: black;
+        }
+
+            .light-mode .dashboard-section {
+                background-color: transparent;
+                color: black;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .light-mode .dashboard-item {
+                background-color: silver;
+                color: black;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+        .masterpages {
+            background-color: black;
+            position: absolute;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: grid;
+            max-width: 48%;
+            min-width: 420px;
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .toggle-btn {
+            padding: 10px;
+            color: silver;
+            margin-left: 680px;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+            .toggle-btn:hover {
+                transform: scale(1.1);
+                color: white;
+            }
+
+        .dark-mode .container {
+            background-color: #0F0F0F;
+        }
+
+        .light-mode .container {
+            background-color: silver;
+            color: black;
+        }
+
+            .light-mode .container h1 {
+                color: black;
+            }
+
+            .light-mode .container h2 {
+                color: black;
+            }
+
+            .light-mode .container h3 {
+                color: black;
+            }
+
+        .container {
+            width: 100%;
+            min-height: 2000px;
+            max-height: 100%;
+            background-color: #0F0F0F;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .sortable {
+            cursor: pointer;
+        }
+
+            .sortable:after {
+                content: '\25B2';
+                padding-left: 10px;
+            }
+
+            .sortable.asc:after {
+                content: '\25B2';
+            }
+
+            .sortable.desc:after {
+                content: '\25BC';
+            }
+    </style>
+    <script type="text/javascript">
+        function preloader() {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("MainDiv").style.display = "block";
+        }
+        window.onload = function () {
+            preloader();
+            var storedTheme = localStorage.getItem('theme') || 'dark-mode';
+            document.body.className = storedTheme;
+            updateToggleButtonText();
+        }
+
+        function toggleTheme() {
+            var body = document.body;
+            var theme = body.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
+            body.className = theme;
+            localStorage.setItem('theme', theme);
+            updateToggleButtonText();
+        }
+
+        function updateToggleButtonText() {
+            var button = document.getElementById('toggleBtn');
+            var currentTheme = document.body.classList.contains('dark-mode') ? 'Light mode' : 'Dark mode';
+            button.textContent = currentTheme;
+        }
+    </script>
+</head>
+<body class="dark-mode">
+    <form runat="server">
+        <asp:HiddenField ID="hfIsUserSignedIn" runat="server" Value="0" />
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+            </Scripts>
+        </asp:ScriptManager>
+        <div id="loading" style="height: 100%; text-align: center;">
+            <asp:Image ID="Ima" runat="server" ImageUrl="~/Images/loading.gif" Width="50px" Height="50px" />
+        </div>
+        <div id="MainDiv" style="display: none;">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar-collapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a class="navbar-brand" href="Default.aspx">
+                            <img src="Images/AMS.png" height="23" alt="AMS Logo" /></a></li>
+                        <li><a href="Default.aspx"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                        <li><a href="Dashboard.aspx"><span class="glyphicon glyphicon-dashboard"></span>Dashboard</a></li>
+                        <li><a href="Profile.aspx"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                        <li><a href="Contact_us.aspx"><span class="glyphicon glyphicon-envelope"></span>Contact Us</a></li>
+                        <li>
+                            <a runat="server" id="LoginBtn" href="Login.aspx"><span class="glyphicon glyphicon-log-in"></span>Sign In</a>
+                        </li>
+                        <li>
+                            <a runat="server" id="LogoutBTN" href="SignOut.aspx"><span class="glyphicon glyphicon-log-out"></span>Sign Out</a>
+                        </li>
+                        <li><a id="toggleBtn" class="toggle-btn" onclick="toggleTheme()">Dark mode</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content area -->
+            <div class="main-content">
+                <!-- Main content placeholder -->
+                <div style="height: 60px; background-color: #121212;"></div>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+                <footer style="background-color: #121212; height: 140px; color: white;">
+                    <center>
+                        <hr style="width: 68%; background-color: transparent;" />
+                        <p><font style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;">Copyright&copy; <%: DateTime.Now.Year %> Innovation quotient®. ALL RIGHTS RESERVED.</font></p>
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Default">Home</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Dashboard" target="_blank">Dashboard</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="Contact_us.aspx" target="_blank">Contact Us</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Privacy_Policy" target="_blank">Privacy Policy</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Terms_and_Conditions" target="_blank">Terms and Conditions</a>
+                    </center>
+                </footer>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
