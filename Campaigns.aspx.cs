@@ -152,9 +152,11 @@ namespace AMS
 
             //TextBox txtPriority = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("txtPriority");
             DropDownList ddlPriority = (DropDownList)CampaignGridView.Rows[e.RowIndex].FindControl("ddlPriority");
+            TextBox txtUEndDate = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("txtUEndDate");
             int newPriority = Convert.ToInt32(ddlPriority.Text);
+            string toDate = txtUEndDate.Text;
 
-            string reslt = UpdateRecord(campaignId, newPriority, Convert.ToInt16(Idn.Value));
+            string reslt = UpdateRecord(campaignId, newPriority, toDate, Convert.ToInt16(Idn.Value));
             if (reslt.Contains(" successful"))
             {
                 ErrLbl.ForeColor = Color.Green;
@@ -198,12 +200,12 @@ namespace AMS
 
             BindCampaignGridView();
         }
-        public string UpdateRecord(int campid, int prio, int usr)
+        public string UpdateRecord(int campid, int prio, string date, int usr)
         {
             try
             {
                 Serve apir = new Serve();
-                string result = apir.updateCampaign("updateCampaign", campid, prio, usr);
+                string result = apir.updateCampaign("updateCampaign", campid, prio, date, usr);
 
                 return result;
             }

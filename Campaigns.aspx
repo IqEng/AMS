@@ -49,6 +49,7 @@
                                             <span style="background-color: transparent;" title='<%# Eval("CampaignName") %>'><%# Eval("CampaignName") %></span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
+                                    <asp:CommandField HeaderText="Edit" ShowEditButton="True" />
                                     <asp:TemplateField HeaderText="Priority" HeaderStyle-CssClass="sortable">
                                         <ItemTemplate>
                                             <span style="background-color: transparent;" title='<%# Eval("Priority") %>'><%# Eval("Priority") %></span>
@@ -87,13 +88,22 @@
                                         <ItemTemplate>
                                             <span style="background-color: transparent;" title='<%# Eval("EndDate") %>'><%# Eval("EndDate") %></span>
                                         </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:TextBox
+                                                ID="txtUEndDate"
+                                                runat="server"
+                                                TextMode="Date"
+                                                Width="230"
+                                                CssClass="form-control"
+                                                Text='<%# Bind("EndDate", "{0:yyyy-MM-dd}") %>'
+                                                Placeholder="YYYY-MM-DD *" />
+                                        </EditItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Status" HeaderStyle-CssClass="sortable">
                                         <ItemTemplate>
                                             <span style="background-color: transparent;" title='<%# Eval("Status") %>'><%# Eval("Status") %></span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:CommandField ShowEditButton="True" />
                                     <asp:TemplateField HeaderText="Actions" HeaderStyle-CssClass="sortable">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="ActivateButton" OnClick="ActivateButton_Click" runat="server" CommandName="Activate" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-success" Text="Activate" Visible='<%# Eval("Status").ToString() == "Deactivated" %>'></asp:LinkButton>

@@ -1300,7 +1300,7 @@ namespace AMS
                 con.Close();
             }
         }
-        public string updateCampaign(string spname, int txtCampaignId, int prio, int Id)
+        public string updateCampaign(string spname, int txtCampaignId, int prio, string dte, int Id)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
             try
@@ -1313,6 +1313,7 @@ namespace AMS
 
                 cmd.Parameters.Add("@Id", SqlDbType.Char).Value = txtCampaignId;
                 cmd.Parameters.Add("@Priority", SqlDbType.Int).Value = prio;
+                cmd.Parameters.Add("@ToDate", SqlDbType.Date).Value = dte;
                 cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = Id;
 
                 try
