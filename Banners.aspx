@@ -23,15 +23,20 @@
                         <asp:DropDownList ID="CampaignDDL" runat="server" CssClass="form-control">
                         </asp:DropDownList>
                     </div>
-                    <div class="form-group">
-                        <asp:Label ID="lblWebsite" runat="server" Text="Website:" />
-                        <asp:ListBox ID="WebsiteListBox" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label ID="Label1" runat="server" Text="Zone:" />
-                        <asp:DropDownList ID="ZonesDDL" runat="server" CssClass="form-control">
-                        </asp:DropDownList>
-                    </div>
+
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <div class="form-group">
+                                <asp:Label ID="lblWebsite" runat="server" Text="Website:" />
+                                <asp:ListBox ID="WebsiteListBox" runat="server" CssClass="form-control" AutoPostBack="true" SelectionMode="Multiple" OnSelectedIndexChanged="WebsiteListBox_SelectedIndexChanged"></asp:ListBox>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label ID="Label1" runat="server" Text="Zone:" />
+                                <asp:DropDownList ID="ZonesDDL" runat="server" CssClass="form-control">
+                                </asp:DropDownList>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                     <hr />
                     <asp:TextBox ID="txtBannerName" runat="server" CssClass="form-control" Placeholder="Banner Name*" MaxLength="23" />
                     <br />

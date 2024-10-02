@@ -69,7 +69,6 @@ namespace AMS
                 
                 BindDropDowns();
                 getWebsites();
-                getZones();
             }
             catch (Exception ex)
             {
@@ -367,17 +366,36 @@ namespace AMS
         {
             try
             {
-                DataTable dta = new DataTable();
-                Serve apir = new Serve();
-                dta = apir.getZonesById("getZonesById", Convert.ToInt16(Idn.Value));
-
-                if (dta.Rows.Count > 0)
+                string webs = "";
+                foreach (ListItem website in WebsiteListBox.Items)
                 {
-                    ZonesDDL.DataValueField = "Id";
-                    ZonesDDL.DataTextField = "Name";
-                    ZonesDDL.DataSource = dta;
-                    ZonesDDL.DataBind();
-                    ZonesDDL.SelectedIndex = 0;
+                    if (website.Selected)
+                    {
+                        if (webs == "")
+                        {
+                            webs = website.Value;
+                        }
+                        else
+                        {
+                            webs = webs + "," + website.Value;
+                        }
+                    }
+                }
+
+                if (webs != "")
+                {
+                    DataTable dta = new DataTable();
+                    Serve apir = new Serve();
+                    dta = apir.getZonesById("getZonesById", webs);
+
+                    if (dta.Rows.Count > 0)
+                    {
+                        ZonesDDL.DataValueField = "Id";
+                        ZonesDDL.DataTextField = "Name";
+                        ZonesDDL.DataSource = dta;
+                        ZonesDDL.DataBind();
+                        ZonesDDL.SelectedIndex = 0;
+                    }
                 }
             }
             catch (Exception ex)
@@ -406,6 +424,11 @@ namespace AMS
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
             }
+        }
+
+        protected void WebsiteListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            getZones();
         }
     }
 }

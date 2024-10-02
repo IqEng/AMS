@@ -282,7 +282,7 @@ namespace AMS
                 con.Close();
             }
         }
-        public DataTable getZonesById(string spname, int UserId)
+        public DataTable getZonesById(string spname, string WebsiteIds)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
             try
@@ -291,7 +291,7 @@ namespace AMS
                 SqlCommand cmd = new SqlCommand(spname, con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("@WebsiteId", SqlDbType.Int).Value = UserId;
+                cmd.Parameters.Add("@WebsiteId", SqlDbType.Char).Value = WebsiteIds;
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
