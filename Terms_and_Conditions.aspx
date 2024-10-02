@@ -25,35 +25,35 @@
                                 <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
 
                                 <h2>Acceptance of Terms</h2>
-                                <p>By accessing and using IQ-AMS.com, you agree to comply with these terms and conditions.</p>
+                                <p>By accessing and using www.adsmetriq.com, you agree to comply with these terms and conditions.</p>
 
                                 <h2>Account Creation</h2>
                                 <p>To access certain features, you may be required to create an account. You are responsible for maintaining the confidentiality of your account information.</p>
 
                                 <h2>Content Usage</h2>
-                                <p>The content available on IQ-AMS.com is for personal, non-commercial use. Unauthorized distribution, reproduction, or modification of the content is strictly prohibited.</p>
+                                <p>The content available on www.adsmetriq.com is for personal, non-commercial use. Unauthorized distribution, reproduction, or modification of the content is strictly prohibited.</p>
 
                                 <h2>Payment and Purchases</h2>
                                 <p>Some features may require a purchase to access. By making a purchase, you agree to provide accurate payment information and authorize the charges. There will be no refund.</p>
 
                                 <h2>Intellectual Property</h2>
-                                <p>All materials on IQ-AMS.com are protected by copyright. You may not use, modify, or distribute any copyrighted material without obtaining the necessary permissions.</p>
+                                <p>All materials on www.adsmetriq.com are protected by copyright. You may not use, modify, or distribute any copyrighted material without obtaining the necessary permissions.</p>
 
                                 <h2>User Conduct</h2>
                                 <p>You agree not to engage in any activities that may disrupt or harm the platform, other users, or the integrity of the content. This includes but is not limited to spamming, hacking, or violating any applicable laws.</p>
 
                                 <h2>Privacy</h2>
-                                <p>We value your privacy and handle your personal information in accordance with our Privacy Policy. By using IQ-AMS.com, you consent to the collection and use of your information as described therein.</p>
+                                <p>We value your privacy and handle your personal information in accordance with our Privacy Policy. By using www.adsmetriq.com, you consent to the collection and use of your information as described therein.</p>
 
                                 <h2>Modifications and Termination</h2>
-                                <p>We reserve the right to modify or terminate the platform or these terms and conditions at any time. Your continued use of IQ-AMS.com after any modifications constitutes acceptance of the updated terms.</p>
+                                <p>We reserve the right to modify or terminate the platform or these terms and conditions at any time. Your continued use of www.adsmetriq.com after any modifications constitutes acceptance of the updated terms.</p>
 
                                 <h2>Authors</h2>
                                 <h3>Content Submission</h3>
-                                <p>By submitting your content to IQ-AMS.com, you grant us a non-exclusive license to display, distribute, and manage your work on the platform.</p>
+                                <p>By submitting your content to www.adsmetriq.com, you grant us a non-exclusive license to display, distribute, and manage your work on the platform.</p>
 
                                 <h3>Copyright Ownership</h3>
-                                <p>You retain the copyright and intellectual property rights to your content. However, by submitting it to IQ-AMS.com, you grant us the necessary rights to operate the platform and provide the services.</p>
+                                <p>You retain the copyright and intellectual property rights to your content. However, by submitting it to www.adsmetriq.com, you grant us the necessary rights to operate the platform and provide the services.</p>
 
                                 <h3>Royalties and Payments</h3>
                                 <p>Authors will receive royalties based on the revenue generated from their content. Payment terms and royalty rates will be outlined in a separate agreement.</p>
@@ -62,13 +62,13 @@
                                 <p>You are responsible for ensuring the accuracy and legality of the content you submit. Violations may result in removal of the content and potential legal action.</p>
 
                                 <h3>Termination</h3>
-                                <p>Both parties have the right to terminate the agreement with written notice. Upon termination, any rights granted to IQ-AMS.com will cease, but previously purchased content will remain accessible.</p>
+                                <p>Both parties have the right to terminate the agreement with written notice. Upon termination, any rights granted to www.adsmetriq.com will cease, but previously purchased content will remain accessible.</p>
 
                                 <h3>Modifications</h3>
-                                <p>We may need to modify your content's formatting or layout to optimize its display on IQ-AMS.com. Substantial changes will not be made without your consent.</p>
+                                <p>We may need to modify your content's formatting or layout to optimize its display on www.adsmetriq.com. Substantial changes will not be made without your consent.</p>
 
                                 <h3>Promotion and Marketing</h3>
-                                <p>We may promote and market your content on IQ-AMS.com and through various channels. You grant us the necessary permissions to use your content for promotional purposes.</p>
+                                <p>We may promote and market your content on www.adsmetriq.com and through various channels. You grant us the necessary permissions to use your content for promotional purposes.</p>
 
                                 <h2>Definitions</h2>
                                 <p>For the purposes of these Terms and Conditions:</p>
@@ -77,7 +77,7 @@
                                     <li><strong>Company</strong> (referred to as "We", "Us" or "Our") refers to IQ-AMS.</li>
                                     <li><strong>Device</strong> means any device that can access the Service such as a computer, cellphone, or digital tablet.</li>
                                     <li><strong>Service</strong> refers to the Application or the Website or both.</li>
-                                    <li><strong>Website</strong> refers to IQ-AMS, accessible from <a href="http://www.iq-ams.com">http://www.iq-ams.com</a></li>
+                                    <li><strong>Website</strong> refers to IQ-AMS, accessible from <a href="http://www.adsmetriq.com">http://www.adsmetriq.com</a></li>
                                 </ul>
 
                                 <h2>Acknowledgment</h2>
@@ -122,7 +122,7 @@
 
                                 <h2>Contact Us</h2>
                                 <p>If you have any questions about these Terms and Conditions, you can contact us:</p>
-                                <p>By email: <a href="mailto:contact@iq-ams.com">contact@iq-ams.com</a></p>
+                                <p>By email: <a href="mailto:contact@adsmetriq.com">contact@adsmetriq.com</a></p>
                         </td>
                         <td style="width: 10%; height: 100%;">&nbsp;</td>
                     </tr>
