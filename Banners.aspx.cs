@@ -135,12 +135,6 @@ namespace AMS
                 return;
             }
 
-            if (WebsiteDDL.SelectedValue == "0")
-            {
-                ErrLbl.Text = "Select a Website!";
-                return;
-            }
-
             if (ZonesDDL.SelectedValue == "0")
             {
                 ErrLbl.Text = "Select a Zone!";
@@ -193,13 +187,15 @@ namespace AMS
             }
 
             string folderPath = Server.MapPath("~/Uploads/");
+
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
 
             string key = GenerateRandomKey(50).Substring(0, 7);
-            string filenme = $"{CampaignDDL.SelectedValue}_{WebsiteDDL.SelectedValue}_{ZonesDDL.SelectedValue}_{key}{fileExtension}";
+            //string filenme = $"{CampaignDDL.SelectedValue}_{WebsiteDDL.SelectedValue}_{ZonesDDL.SelectedValue}_{key}{fileExtension}";
+            string filenme = $"{CampaignDDL.SelectedValue}_{key}_{ZonesDDL.SelectedValue}_{key}{fileExtension}";
             string savePath = Path.Combine(folderPath, filenme);
 
             bool proceed = false;
@@ -272,10 +268,14 @@ namespace AMS
 
             if (proceed)
             {
-                // Insert the record into the database
-                string result = InsertRecord(
+                string result = "";
+                foreach (ListItem website in WebsiteListBox.Items)
+                {
+                    if (website.Selected)
+                    {
+                        result = InsertRecord(
                     filenme,
-                    WebsiteDDL.SelectedValue.Trim(),
+                    website.Value,
                     ddlBannerSizeDDL.SelectedValue.Trim(),
                     CampaignDDL.SelectedValue.Trim(),
                     ZonesDDL.SelectedValue.Trim(),
@@ -284,6 +284,8 @@ namespace AMS
                     txtBannerLink.Text.Trim(),
                     txtBannerName.Text.Trim()
                 );
+                    }
+                }
 
                 if (result.Contains(" successful"))
                 {
@@ -305,7 +307,7 @@ namespace AMS
         private void ResetFormFields()
         {
             CampaignDDL.SelectedIndex = 0;
-            WebsiteDDL.SelectedIndex = 0;
+            WebsiteListBox.ClearSelection();
             ZonesDDL.SelectedIndex = 0;
             ddlBannerSizeDDL.SelectedIndex = 0;
             ddlBannerType.SelectedIndex = 0;
@@ -314,7 +316,6 @@ namespace AMS
             txtBannerName.Text = string.Empty;
         }
 
-        // Utility method to generate a random key
         private string GenerateRandomKey(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -395,11 +396,10 @@ namespace AMS
 
                 if (dta.Rows.Count > 0)
                 {
-                    WebsiteDDL.DataValueField = "Id";
-                    WebsiteDDL.DataTextField = "Name";
-                    WebsiteDDL.DataSource = dta;
-                    WebsiteDDL.DataBind();
-                    WebsiteDDL.SelectedIndex = 0;
+                    WebsiteListBox.DataValueField = "Id";
+                    WebsiteListBox.DataTextField = "Name";
+                    WebsiteListBox.DataSource = dta;
+                    WebsiteListBox.DataBind();
                 }
             }
             catch (Exception ex)

@@ -25,8 +25,7 @@
                     </div>
                     <div class="form-group">
                         <asp:Label ID="lblWebsite" runat="server" Text="Website:" />
-                        <asp:DropDownList ID="WebsiteDDL" runat="server" CssClass="form-control">
-                        </asp:DropDownList>
+                        <asp:ListBox ID="WebsiteListBox" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
                     </div>
                     <div class="form-group">
                         <asp:Label ID="Label1" runat="server" Text="Zone:" />

@@ -150,25 +150,23 @@ namespace AMS
         {
             int campaignId = Convert.ToInt32(CampaignGridView.DataKeys[e.RowIndex].Value);
 
-            TextBox txtPriority = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("txtPriority");
-            int newPriority = Convert.ToInt32(txtPriority.Text);
+            //TextBox txtPriority = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("txtPriority");
+            DropDownList ddlPriority = (DropDownList)CampaignGridView.Rows[e.RowIndex].FindControl("ddlPriority");
+            int newPriority = Convert.ToInt32(ddlPriority.Text);
 
             string reslt = UpdateRecord(campaignId, newPriority, Convert.ToInt16(Idn.Value));
             if (reslt.Contains(" successful"))
             {
                 ErrLbl.ForeColor = Color.Green;
                 ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + reslt + "');", true);
-                ErrLbl.Text = reslt;
 
+                CampaignGridView.EditIndex = -1;
                 BindCampaignGridView();
             }
             else
             {
-                ErrLbl.ForeColor = Color.Red;
-                ErrLbl.Text = reslt;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + reslt + "');", true);
             }
-
-            CampaignGridView.EditIndex = -1;
         }
 
         protected void CampaignGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)

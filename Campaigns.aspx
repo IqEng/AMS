@@ -41,7 +41,7 @@
                     <div class="grid-section">
                         <div class="dashboard-item">
                             <h4>Registered Campaigns</h4>
-                            <asp:GridView ID="CampaignGridView" AllowPaging="True" PageSize="10" OnPageIndexChanging="CampaignGridView_PageIndexChanging" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-dark table-hover" OnRowEditing="CampaignGridView_RowEditing" OnRowUpdating="CampaignGridView_RowUpdating" OnRowCancelingEdit="CampaignGridView_RowCancelingEdit">
+                            <asp:GridView ID="CampaignGridView" AllowPaging="True" DataKeyNames="Id" PageSize="10" OnPageIndexChanging="CampaignGridView_PageIndexChanging" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-dark table-hover" OnRowEditing="CampaignGridView_RowEditing" OnRowUpdating="CampaignGridView_RowUpdating" OnRowCancelingEdit="CampaignGridView_RowCancelingEdit">
                                 <RowStyle BorderStyle="inset" BorderColor="white" />
                                 <Columns>
                                     <asp:TemplateField HeaderText="Campaign Name" HeaderStyle-CssClass="sortable">
@@ -54,7 +54,13 @@
                                             <span style="background-color: transparent;" title='<%# Eval("Priority") %>'><%# Eval("Priority") %></span>
                                         </ItemTemplate>
                                         <EditItemTemplate>
-                                            <asp:TextBox ID="txtPriority" runat="server" Text='<%# Eval("Priority") %>' CssClass="form-control"></asp:TextBox>
+                                            <asp:DropDownList ID="ddlPriority" runat="server" CssClass="form-control" SelectedValue='<%# Eval("Priority") %>'>
+                                                <asp:ListItem Value="1">1</asp:ListItem>
+                                                <asp:ListItem Value="2">2</asp:ListItem>
+                                                <asp:ListItem Value="3">3</asp:ListItem>
+                                                <asp:ListItem Value="4">4</asp:ListItem>
+                                                <asp:ListItem Value="5">5</asp:ListItem>
+                                            </asp:DropDownList>
                                         </EditItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Advertiser" HeaderStyle-CssClass="sortable">

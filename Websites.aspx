@@ -24,7 +24,7 @@
                             <br />
                             <asp:TextBox ID="WebsiteUrlTextBox" runat="server" CssClass="form-control" Placeholder="Website URL *" MaxLength="60" />
                             <br />
-                            <asp:TextBox ID="txtCampaignBudget" runat="server" CssClass="form-control" Width="230" Placeholder="Campaign Budget" TextMode="Number" />
+                            <asp:TextBox ID="txtCampaignBudget" runat="server" CssClass="form-control" Width="230" Placeholder="Budget" TextMode="Number" />
                             <br />
                             <div class="form-group">
                                 <asp:Label ID="LabelTargetFrame" runat="server" Text="Target frame:" />
