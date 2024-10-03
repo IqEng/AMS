@@ -701,7 +701,7 @@ namespace AMS
                 con.Close();
             }
         }
-        public string insertBanner(string spname, string filenme, int WebsiteId, string BannerSize, int CampaignDDLVlu, int ZoneId, string BannerTypeId, string Target, string txtBannerLinkVlu, string txtBannerNameVlu, int UserId)
+        public string insertBanner(string spname, string filenme, int WebsiteId, int CampaignDDLVlu, int ZoneId, string BannerTypeId, string Target, string txtBannerLinkVlu, string txtBannerNameVlu, int UserId)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
             try
@@ -716,7 +716,6 @@ namespace AMS
                 cmd.Parameters.Add("@WebsiteId", SqlDbType.Int).Value = WebsiteId;
                 cmd.Parameters.Add("@FileName", SqlDbType.Char).Value = filenme;
                 cmd.Parameters.Add("@CampaignId", SqlDbType.Int).Value = CampaignDDLVlu;
-                cmd.Parameters.Add("@BannerSizeId", SqlDbType.Char).Value = BannerSize;
                 cmd.Parameters.Add("@ZoneId", SqlDbType.Int).Value = ZoneId;
                 cmd.Parameters.Add("@BannerTypeId", SqlDbType.Char).Value = BannerTypeId.Trim();
                 cmd.Parameters.Add("@Target", SqlDbType.Char).Value = Target.Trim();

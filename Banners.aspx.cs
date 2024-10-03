@@ -275,7 +275,6 @@ namespace AMS
                         result = InsertRecord(
                     filenme,
                     website.Value,
-                    ddlBannerSizeDDL.SelectedValue.Trim(),
                     CampaignDDL.SelectedValue.Trim(),
                     ZonesDDL.SelectedValue.Trim(),
                     ddlBannerType.SelectedValue.Trim(),
@@ -308,7 +307,6 @@ namespace AMS
             CampaignDDL.SelectedIndex = 0;
             WebsiteListBox.ClearSelection();
             ZonesDDL.SelectedIndex = 0;
-            ddlBannerSizeDDL.SelectedIndex = 0;
             ddlBannerType.SelectedIndex = 0;
             ddlTarget.SelectedIndex = 0;
             txtBannerLink.Text = string.Empty;
@@ -322,12 +320,12 @@ namespace AMS
                 .Select(s => s[new Random().Next(s.Length)]).ToArray());
         }
 
-        public string InsertRecord(string filenme, string WebsiteId, string BannerSize, string CampaignDDLVlu, string ZonesDDLVlu, string ddlBannerTypeVlu, string ddlTargetVlu, string txtBannerLinkVlu, string txtBannerNameVlu)
+        public string InsertRecord(string filenme, string WebsiteId, string CampaignDDLVlu, string ZonesDDLVlu, string ddlBannerTypeVlu, string ddlTargetVlu, string txtBannerLinkVlu, string txtBannerNameVlu)
         {
             try
             {
                 Serve apir = new Serve();
-                string result = apir.insertBanner("insertBanner", filenme, Convert.ToInt16(WebsiteId), BannerSize, Convert.ToInt16(CampaignDDLVlu), Convert.ToInt16(ZonesDDLVlu), ddlBannerTypeVlu, ddlTargetVlu, txtBannerLinkVlu, txtBannerNameVlu, Convert.ToInt16(Idn.Value));
+                string result = apir.insertBanner("insertBanner", filenme, Convert.ToInt16(WebsiteId), Convert.ToInt16(CampaignDDLVlu), Convert.ToInt16(ZonesDDLVlu), ddlBannerTypeVlu, ddlTargetVlu, txtBannerLinkVlu, txtBannerNameVlu, Convert.ToInt16(Idn.Value));
 
                 return result;
             }

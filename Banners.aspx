@@ -53,31 +53,6 @@
                 </asp:Panel>
             </div>
             <div class="dashboard-item">
-                <div class="form-group">
-                    <asp:Label ID="lblSize" runat="server" Text="Banner Size:" />
-                    <asp:DropDownList ID="ddlBannerSizeDDL" runat="server" CssClass="form-control">
-                        <asp:ListItem Text="-Select-" Selected="True" Value="0" />
-                        <asp:ListItem Text="Banner, Button or Rectangle" Value="Banner" />
-                        <asp:ListItem Value="468x60" Text="IAB Full Banner (468 x 60)" />
-                        <asp:ListItem Value="120x600" Text="IAB Skyscraper (120 x 600)" />
-                        <asp:ListItem Value="728x90" Text="IAB Leaderboard (728 x 90)" />
-                        <asp:ListItem Value="120x90" Text="IAB Button 1 (120 x 90)" />
-                        <asp:ListItem Value="120x60" Text="IAB Button 2 (120 x 60)" />
-                        <asp:ListItem Value="234x60" Text="IAB Half Banner (234 x 60)" />
-                        <asp:ListItem Value="88x31" Text="IAB Micro Bar (88 x 31)" />
-                        <asp:ListItem Value="125x125" Text="IAB Square Button (125 x 125)" />
-                        <asp:ListItem Value="120x240" Text="IAB Vertical Banner (120 x 240)" />
-                        <asp:ListItem Value="180x150" Text="IAB Rectangle (180 x 150)" />
-                        <asp:ListItem Value="300x250" Text="IAB Medium Rectangle (300 x 250)" />
-                        <asp:ListItem Value="336x280" Text="IAB Large Rectangle (336 x 280)" />
-                        <asp:ListItem Value="240x400" Text="IAB Vertical Rectangle (240 x 400)" />
-                        <asp:ListItem Value="250x250" Text="IAB Square Pop-up (250 x 250)" />
-                        <asp:ListItem Value="160x600" Text="IAB Wide Skyscraper (160 x 600)" />
-                        <asp:ListItem Value="720x300" Text="IAB Pop-Under (720 x 300)" />
-                        <asp:ListItem Value="300x100" Text="IAB 3:1 Rectangle (300 x 100)" />
-                    </asp:DropDownList>
-                </div>
-                <hr />
                 <asp:Label ID="Label3" runat="server" Text="Resource:"></asp:Label>
                 <asp:FileUpload ID="fileBannerUpload" runat="server" CssClass="form-control" />
                 <asp:CustomValidator ID="fileValidator" runat="server" ControlToValidate="fileBannerUpload"
