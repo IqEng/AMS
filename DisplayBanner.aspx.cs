@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
@@ -17,6 +18,7 @@ namespace AMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string TargetWeb = ConfigurationManager.AppSettings["TargetWeb"];
             string zoneId = ""; string BannerId = ""; string CampaignId = ""; string WebsiteId = ""; string Target = ""; string BannerLink = "";
             string BannerTypeId = ""; string BannerSizeId = ""; string FileName = ""; string TargetFrame = ""; string Priority = "";
             try
@@ -44,7 +46,7 @@ namespace AMS
     <html>
     <body style='margin:0;padding:0;'>
         <a href='HitAd.aspx?zoneId={zoneId}&BannerLink' target='{Target}'>
-            <img src='{"https://advertisementmanagementsystem.azurewebsites.net/Uploads/" + FileName}' alt='{BannerTypeId}' style='width:100%; height:100%;' />
+            <img src='{TargetWeb + "Uploads/" + FileName}' alt='{BannerTypeId}' style='width:100%; height:100%;' />
         </a>
     </body>
     </html>");
@@ -55,7 +57,7 @@ namespace AMS
 <html>
 <body style='margin:0;padding:0;'>
     <div style='width:100%; height:100%; position:relative;'>
-        <iframe src='{"https://advertisementmanagementsystem.azurewebsites.net/Uploads/" + FileName}' style='width:100%; height:100%; border:none;'></iframe>
+        <iframe src='{TargetWeb + "/Uploads/" + FileName}' style='width:100%; height:100%; border:none;'></iframe>
         <a href='HitAd.aspx?zoneId={zoneId}' target='{Target}' style='position:absolute; top:0; left:0; width:100%; height:100%; background:transparent;'></a>
     </div>
 </body>
@@ -78,7 +80,7 @@ namespace AMS
     <html>
     <body style='margin:0;padding:0; position:relative;'>
         <video width='100%' height='100%' controls style='z-index: 1; position:relative;'>
-            <source src='{"https://advertisementmanagementsystem.azurewebsites.net/Uploads/" + FileName}' type='video/mp4'>
+            <source src='{TargetWeb + "/Uploads/" + FileName}' type='video/mp4'>
             Your browser does not support the video tag.
         </video>
         <a href='{BannerLink}' target='{Target}' style='z-index: 2;'>
