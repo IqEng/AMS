@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -127,6 +128,7 @@ namespace AMS
 
         public async Task<bool> SendEmailAsync(string nme, string email_, string password_, string key)
         {
+            string TargetWeb = ConfigurationManager.AppSettings["TargetWeb"];
             try
             {
                 MailMessage mail = new MailMessage
@@ -137,8 +139,8 @@ namespace AMS
                 mail.To.Add(email_);
 
                 mail.Subject = "Welcome to AMS - Account Activation";
-                string LINK = "<a href='https://advertisementmanagementsystem.azurewebsites.net/Terms_and_Conditions.aspx' style='color: #007BFF; text-decoration: none;'>Terms</a>";
-                string ALINK = "<a href='https://advertisementmanagementsystem.azurewebsites.net/Val.aspx?Cpara=" + key + "' style='color: #007BFF; text-decoration: none; font-weight: bold;'>Activate My Account</a>";
+                string LINK = "<a href='" + TargetWeb + "'Terms_and_Conditions.aspx' style='color: #007BFF; text-decoration: none;'>Terms</a>";
+                string ALINK = "<a href='" + TargetWeb + "'Val.aspx?Cpara=" + key + "' style='color: #007BFF; text-decoration: none; font-weight: bold;'>Activate My Account</a>";
                 string cdetail = "<p style='font-size: 16px; color: #555;'>Please use the following activation link: " + ALINK + "</p>";
 
                 mail.Body = "<div style='background-color: #f4f4f4; color: #333; font-family: Arial, sans-serif; padding: 20px;'>"

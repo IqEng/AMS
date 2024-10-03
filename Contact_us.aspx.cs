@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace AMS
 {
@@ -66,6 +67,7 @@ namespace AMS
         }
         public async Task<bool> SendEmailAsync(string subject, string message, string nme, string email_)
         {
+            string TargetWeb = ConfigurationManager.AppSettings["TargetWeb"];
             try
             {
                 MailMessage mail = new MailMessage
@@ -76,7 +78,7 @@ namespace AMS
                 };
                 mail.To.Add("shanaka@iq-global.com");
 
-                string INNOVATION_QUOTIENT = "<a href='https://advertisementmanagementsystem.azurewebsites.net/Terms_and_Conditions.aspx' style='color: #007BFF; text-decoration: none; font-weight: bold;'>Terms</a>";
+                string INNOVATION_QUOTIENT = "<a href='" + TargetWeb + "'Terms_and_Conditions.aspx' style='color: #007BFF; text-decoration: none; font-weight: bold;'>Terms</a>";
 
                 mail.Body = "<div style='background-color: #f4f4f4; color: #333; font-family: Arial, sans-serif; padding: 20px;'>"
                             + "<div style='background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1);'>"

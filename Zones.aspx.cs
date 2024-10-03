@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -244,6 +245,7 @@ namespace AMS
         }
         protected void DownloadButton_Click(object sender, EventArgs e)
         {
+            string TargetWeb = ConfigurationManager.AppSettings["TargetWeb"];
             LinkButton clickedButton = sender as LinkButton;
             if (clickedButton != null)
             {
@@ -286,7 +288,7 @@ namespace AMS
                         { height = "100%"; }
 
                         string script = $@"
-    <div id='adZone'><iframe src='https://advertisementmanagementsystem.azurewebsites.net/DisplayBanner.aspx?zoneId={zoneId}' 
+    <div id='adZone'><iframe src='{TargetWeb}DisplayBanner.aspx?zoneId={zoneId}' 
             width='{width}' height='{height}' frameborder='0' scrolling='no'></iframe></div>";
 
                         Session["DownloadContent"] = script;
