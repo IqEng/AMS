@@ -292,21 +292,30 @@ namespace AMS
         protected void SubmitBtn_Click(object sender, EventArgs e)
         {
             ErrLbl.ForeColor = Color.Red;
-
-            Serve apir = new Serve();
-            string result = apir.insertSecondaryUser("insertSecondaryUser", Convert.ToInt16(UsersDDL.SelectedValue.ToString()), Convert.ToInt16(Idn.Value));
-
-            if (result.Contains(" successful"))
+            if (UsersDDL.SelectedIndex == 0)
             {
-                ErrLbl.ForeColor = Color.Green;
-                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + result + "');", true);
-                ErrLbl.Text = result;
+                ErrLbl.Text = "Select a user!";
             }
-            else
-            {
+            else {
                 ErrLbl.ForeColor = Color.Red;
-                ErrLbl.Text = result;
+
+                Serve apir = new Serve();
+                string result = apir.insertSecondaryUser("insertSecondaryUser", Convert.ToInt16(UsersDDL.SelectedValue.ToString()), Convert.ToInt16(Idn.Value));
+
+                if (result.Contains(" successful"))
+                {
+                    ErrLbl.ForeColor = Color.Green;
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + result + "');", true);
+                    ErrLbl.Text = result;
+                }
+                else
+                {
+                    ErrLbl.ForeColor = Color.Red;
+                    ErrLbl.Text = result;
+                }
             }
+            BindUsersGridView();
+            BindUsersDDL();
         }
 
         protected void DeleteButton_Click(object sender, EventArgs e)

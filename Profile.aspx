@@ -91,7 +91,7 @@
                     </asp:UpdatePanel>
                 </asp:Panel>
             </div>
-            <div class="dashboard-item" style="max-height: 410px;">
+            <div class="dashboard-item" style="max-height: 100%;">
                 <h4>Reset Password</h4>
                 <div class="form-group">
                     <asp:Label ID="lblProfilePassword" runat="server" Text="Current Password:" />
@@ -111,50 +111,52 @@
                 <div class="form-group">
                     <asp:Button ID="UpdatePassBtn" runat="server" CssClass="btn-primary" Text="Reset Password" OnClick="UpdatePassBtn_Click" />
                 </div>
-            </div>
-            <div class="dashboard-item" style="max-height: 410px;">
-                <h4>Add Secondary User</h4>
-                <div class="form-group">
-                    <asp:Label ID="Label2" runat="server" Text="Users of the Agency:" />
-                    <asp:DropDownList ID="UsersDDL" runat="server" CssClass="form-control">
-                    </asp:DropDownList>
-                </div>
-                <div class="form-group text-center">
-                    <asp:Label ID="ErrLbl" runat="server" Height="15px" BackColor="Transparent" Text="" ForeColor="Red" Font-Size="Smaller"></asp:Label>
-                </div>
-                <div class="form-group">
-                    <asp:Button ID="SubmitBtn" runat="server" CssClass="btn-primary" Text="Reset Password" OnClick="SubmitBtn_Click"/>
-                </div>
+                <br />
                 <hr />
-                <div class="form-group">
-                    <h4>Registered Users</h4>
-                    <asp:GridView ID="UserGridView" AllowPaging="True" DataKeyNames="Id" PageSize="10" OnPageIndexChanging="ZoneGridView_PageIndexChanging" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-dark table-hover">
-                        <RowStyle BorderStyle="inset" BorderColor="white" />
-                        <Columns>
-                            <asp:TemplateField HeaderText="User Name" HeaderStyle-CssClass="sortable">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="NameLbl" Style="background-color: transparent;" title='<%# Eval("Name") %>'><%# Eval("Name") %></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Created Date" HeaderStyle-CssClass="sortable">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="CreatedDate" Style="background-color: transparent;" title='<%# Eval("CreatedDate") %>'><%# Eval("CreatedDate") %></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Status" HeaderStyle-CssClass="sortable">
-                                <ItemTemplate>
-                                    <asp:Label runat="server" ID="Status" Style="background-color: transparent;" title='<%# Eval("Status") %>'><%# Eval("Status") %></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
 
-                            <asp:TemplateField HeaderText="Actions" HeaderStyle-CssClass="sortable">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="DeleteButton" OnClick="DeleteButton_Click" runat="server" CommandName="Delete" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-danger" Text="Delete" Visible='<%# Eval("Status").ToString() == "Active" %>'></asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
-                    <script type="text/javascript">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <h4>Add Secondary User</h4>
+                        <div class="form-group">
+                            <asp:Label ID="Label2" runat="server" Text="Users of the Agency:" />
+                            <asp:DropDownList ID="UsersDDL" runat="server" CssClass="form-control">
+                            </asp:DropDownList>
+                        </div>
+                        <div class="form-group text-center">
+                            <asp:Label ID="ErrLbl" runat="server" Height="15px" BackColor="Transparent" Text="" ForeColor="Red" Font-Size="Smaller"></asp:Label>
+                        </div>
+                        <div class="form-group">
+                            <asp:Button ID="SubmitBtn" runat="server" CssClass="btn-primary" Text="Add Secondary" OnClick="SubmitBtn_Click" />
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <asp:GridView ID="UserGridView" AllowPaging="True" DataKeyNames="Id" PageSize="10" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-dark table-hover">
+                                <RowStyle BorderStyle="inset" BorderColor="white" />
+                                <Columns>
+                                    <asp:TemplateField HeaderText="User Name" HeaderStyle-CssClass="sortable">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="NameLbl" Style="background-color: transparent;" title='<%# Eval("Name") %>'><%# Eval("Name") %></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Created Date" HeaderStyle-CssClass="sortable">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="CreatedDate" Style="background-color: transparent;" title='<%# Eval("CreatedDate") %>'><%# Eval("CreatedDate") %></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Status" HeaderStyle-CssClass="sortable">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" ID="Status" Style="background-color: transparent;" title='<%# Eval("Status") %>'><%# Eval("Status") %></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField HeaderText="Actions" HeaderStyle-CssClass="sortable">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="DeleteButton" OnClick="DeleteButton_Click" runat="server" CommandName="Delete" CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-danger" Text="Delete" Visible='<%# Eval("Status").ToString() == "Active" %>'></asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                            <script type="text/javascript">
                         document.addEventListener('DOMContentLoaded', function () {
                             const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
 
@@ -169,8 +171,10 @@
                                     .forEach(tr => table.appendChild(tr));
                             })));
                         });
-                    </script>
-                </div>
+                            </script>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
     </div>
