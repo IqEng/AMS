@@ -318,6 +318,42 @@ namespace AMS
                 con.Close();
             }
         }
+        public DataTable getSecondaryUserDetailsById(string spname, int UserId)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(spname, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = UserId;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                dr.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else
+                {
+                    DataTable dtx = new DataTable();
+                    return dtx;
+                }
+            }
+            catch
+            {
+                DataTable dtx = new DataTable();
+                return dtx;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         public DataTable getBannerListById(string spname, int UserId)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
@@ -769,6 +805,42 @@ namespace AMS
                 con.Close();
             }
         }
+        public DataTable getSecondaryUsersById(string spname, int UserId)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(spname, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = UserId;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                dr.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else
+                {
+                    DataTable dtx = new DataTable();
+                    return dtx;
+                }
+            }
+            catch
+            {
+                DataTable dtx = new DataTable();
+                return dtx;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         public DataTable getWebsiteByAdvertiserId(string spname, int UserId)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
@@ -1056,6 +1128,49 @@ namespace AMS
                 con.Close();
             }
         }
+        public string deleteSecondaryUserById(string spname, int suID, int UserId)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlTransaction trn = con.BeginTransaction();
+
+                SqlCommand cmd = new SqlCommand(spname, con, trn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@SecondaryUserId", SqlDbType.Int).Value = suID;
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = UserId;
+
+                try
+                {
+                    int cunt = cmd.ExecuteNonQuery();
+                    if (cunt > 0)
+                    {
+                        trn.Commit();
+                        return "User has been removed successfully";
+                    }
+                    else
+                    {
+                        trn.Rollback();
+                        return "User removel process unsuccessful";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    trn.Rollback();
+                    return ex.Message + " - " + "User removel process unsuccessful";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message + " - " + "User removel process unsuccessful";
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         public string updateZoneById(string spname, int ZoneId, int Status, int UserId)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
@@ -1164,6 +1279,50 @@ namespace AMS
                 con.Close();
             }
         }
+        public string insertSecondaryUser(string spname, int SecondaryUserId, int Id)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlTransaction trn = con.BeginTransaction();
+
+                SqlCommand cmd = new SqlCommand(spname, con, trn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@SecondaryUserId", SqlDbType.Int).Value = SecondaryUserId;
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = Id;
+
+                try
+                {
+                    int cunt = cmd.ExecuteNonQuery();
+                    if (cunt > 0)
+                    {
+                        trn.Commit();
+                        return "Secondary user has been created successfully.";
+                    }
+                    else
+                    {
+                        trn.Rollback();
+                        return "Secondary user creation process unsuccessful.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    trn.Rollback();
+                    return ex.Message + " - " + "Operation unsuccessful.";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message + " - " + "Operation unsuccessful.";
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public string insertZone(string spname, string Name, string Description, string WebsiteId, string ZoneTypeId, string ZoneSizeId, int mWidth, int mHeight, int Id)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());

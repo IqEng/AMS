@@ -54,9 +54,58 @@ namespace AMS
                     }
                     Description = Kripta.Decrypt(userin4ck["description"].Trim(), "PPA4XCyfPMBrVASxNr/8A").ToString().Trim();
                     profileDescription.Text = Description;
+
+                    BindUsersGridView();
                 }
             }
         }
+
+        private void BindUsersGridView()
+        {
+            try
+            {
+                DataTable dta = new DataTable();
+                Serve apir = new Serve();
+                dta = apir.getSecondaryUserDetailsById("getSecondaryUserDetailsById", Convert.ToInt16(Idn.Value));
+
+                if (dta.Rows.Count > 0)
+                {
+                    ViewState["UserTable"] = dta;
+
+                    UserGridView.DataSource = dta;
+                    UserGridView.DataBind();
+                }
+
+                BindUsersDDL();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+            }
+        }
+        private void BindUsersDDL()
+        {
+            try
+            {
+                DataTable dtc = new DataTable();
+                Serve apir = new Serve();
+                dtc = apir.getSecondaryUsersById("getSecondaryUsersById", Convert.ToInt16(Idn.Value));
+
+                if (dtc.Rows.Count > 0)
+                {
+                    UsersDDL.DataValueField = "Id";
+                    UsersDDL.DataTextField = "Name";
+                    UsersDDL.DataSource = dtc;
+                    UsersDDL.DataBind();
+                    UsersDDL.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+            }
+        }
+
         protected void UpdateProfileButton_Click(object sender, EventArgs e)
         {
             ErrTB.ForeColor = Color.Red;
@@ -238,6 +287,64 @@ namespace AMS
                 rng.GetBytes(buff);
             }
             return BitConverter.ToString(buff).Replace("-", "");
+        }
+
+        protected void SubmitBtn_Click(object sender, EventArgs e)
+        {
+            ErrLbl.ForeColor = Color.Red;
+
+            Serve apir = new Serve();
+            string result = apir.insertSecondaryUser("insertSecondaryUser", Convert.ToInt16(UsersDDL.SelectedValue.ToString()), Convert.ToInt16(Idn.Value));
+
+            if (result.Contains(" successful"))
+            {
+                ErrLbl.ForeColor = Color.Green;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + result + "');", true);
+                ErrLbl.Text = result;
+            }
+            else
+            {
+                ErrLbl.ForeColor = Color.Red;
+                ErrLbl.Text = result;
+            }
+        }
+
+        protected void DeleteButton_Click(object sender, EventArgs e)
+        {
+            LinkButton clickedButton = sender as LinkButton;
+            if (clickedButton != null)
+            {
+                int suID = Convert.ToInt32(clickedButton.CommandArgument);
+                UpdateStatus(suID);
+            }
+
+            BindUsersGridView();
+            BindUsersDDL();
+        }
+
+        private void UpdateStatus(int suID)
+        {
+            try
+            {
+                Serve apir = new Serve();
+                string result = apir.deleteSecondaryUserById("deleteSecondaryUserById", suID, Convert.ToInt16(Idn.Value));
+
+                if (result.Contains(" successful"))
+                {
+                    ErrLbl.ForeColor = Color.Green;
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + result + "');", true);
+                    ErrLbl.Text = result;
+                }
+                else
+                {
+                    ErrLbl.ForeColor = Color.Red;
+                    ErrLbl.Text = result;
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+            }
         }
     }
 }
