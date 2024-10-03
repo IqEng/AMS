@@ -16,7 +16,9 @@ namespace AMS
             string zoneId = ""; string Target = ""; string BannerLink = ""; string TargetFrame = ""; string BannerId = "";
             try
             {
-                zoneId = Request.QueryString["zoneId"];
+                string mask = Request.QueryString["zoneId"];
+                zoneId = Kripta.Decrypt(zoneId, "mNwg0rIP8");
+
                 if (zoneId != null)
                 {
                     DataTable dt = new DataTable();
