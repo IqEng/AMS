@@ -1,4 +1,5 @@
 ﻿using Antlr.Runtime.Misc;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security.Policy;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
@@ -46,13 +48,15 @@ namespace AMS
                             Priority = row["Priority"].ToString().Trim();
                         }
                         string mask = Kripta.Encrypt(zoneId.Trim(), "mNwg0rIP8");
+                        string urlEncodedZoneId = HttpUtility.UrlEncode(mask);
+                        mask = urlEncodedZoneId;
 
                         if (BannerTypeId == "image")
                         {
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='30'>
+                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0;'>
                                 <a href='HitAd.aspx?zoneId={mask}' target='{Target}'>
@@ -66,7 +70,7 @@ namespace AMS
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='30'>
+                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0;'>
                                 <div style='width:100%; height:100%; position:relative;'>
@@ -81,7 +85,7 @@ namespace AMS
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='30'>
+                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0; display:flex; align-items:center; justify-content:center; height:100vh;'>
                                 <a href='HitAd.aspx?zoneId={mask}' target='{Target}' style='text-decoration:none; color:black; font-size:24px;'>
@@ -95,7 +99,7 @@ namespace AMS
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='30'>
+                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0; position:relative;'>
                                 <video width='100%' height='100%' controls style='z-index: 1; position:relative;'>
@@ -113,7 +117,7 @@ namespace AMS
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='30'>
+                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0; display:flex; align-items:center; justify-content:center; height:100vh; background-color:#f0f0f0; color:#333; font-family:Arial, sans-serif;'>
                                 <div style='text-align:center;'>
@@ -130,7 +134,7 @@ namespace AMS
                         Response.Write($@"
                         <html>
                         <head>
-                            <meta http-equiv='refresh' content='30'>
+                            <meta http-equiv='refresh' content='600'>
                         </head>
                         <body style='margin:0;padding:0; display:flex; align-items:center; justify-content:center; height:100vh; background-color:#f0f0f0; color:#333; font-family:Arial, sans-serif;'>
                             <div style='text-align:center;'>
@@ -147,7 +151,7 @@ namespace AMS
                     Response.Write($@"
                     <html>
                     <head>
-                        <meta http-equiv='refresh' content='30'>
+                        <meta http-equiv='refresh' content='600'>
                     </head>
                     <body style='margin:0;padding:0; display:flex; align-items:center; justify-content:center; height:100vh; background-color:#f0f0f0; color:#333; font-family:Arial, sans-serif;'>
                         <div style='text-align:center;'>
