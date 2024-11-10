@@ -17,7 +17,7 @@ namespace AMS
             try
             {
                 string mask = Request.QueryString["zoneId"];
-                zoneId = Kripta.Decrypt(mask, "mNwg0rIP8");
+                zoneId = Kripta.Decrypt(mask.Trim(), "mNwg0rIP8");
 
                 if (zoneId != null)
                 {

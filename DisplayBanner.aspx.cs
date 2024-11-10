@@ -23,7 +23,7 @@ namespace AMS
             string BannerTypeId = ""; string BannerSizeId = ""; string FileName = ""; string TargetFrame = ""; string Priority = "";
             try
             {
-                zoneId = Request.QueryString["zoneId"];
+                zoneId = Request.QueryString["zoneId"].Trim();
                 if (zoneId != null)
                 {
                     DataTable dt = new DataTable();
@@ -45,7 +45,7 @@ namespace AMS
                             TargetFrame = row["TargetFrame"].ToString().Trim();
                             Priority = row["Priority"].ToString().Trim();
                         }
-                        string mask = Kripta.Encrypt(zoneId, "mNwg0rIP8");
+                        string mask = Kripta.Encrypt(zoneId.Trim(), "mNwg0rIP8");
 
                         if (BannerTypeId == "image")
                         {
