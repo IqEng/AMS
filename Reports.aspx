@@ -1,66 +1,6 @@
 ﻿<%@ Page Title="Reports & Analytics" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="AMS._Reports" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <style>
-        /* Style for the report header */
-        .report-header-panel {
-            margin-bottom: 5px;
-            padding: 5px;
-            border: 1px solid #dcdcdc;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            color: black;
-            background-color: transparent;
-        }
-
-        /* GridView styling */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table-bordered {
-            border: 1px solid #ddd;
-        }
-
-            .table-bordered th, .table-bordered td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: left;
-            }
-
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: #f9f9f9;
-        }
-
-        .table thead {
-            background-color: #f0f0f0;
-            font-weight: bold;
-        }
-
-        .table th {
-            padding: 10px;
-        }
-
-        .table td {
-            padding: 8px;
-        }
-
-        .table th, .table td {
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        .table-hover tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .table-bordered {
-            border: 1px solid #ddd;
-        }
-    </style>
-
     <div style="position: relative; width: 100%; height: auto; background-image: url('Images/report.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; overflow: hidden;"
         class="blurred-background">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
