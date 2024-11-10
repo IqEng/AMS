@@ -14,9 +14,11 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="Images/AMS.ico" rel="shortcut icon" type="image/x-icon" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         body {
             font-size: 16px;
@@ -124,9 +126,6 @@
             padding: 20px;
             margin-bottom: 20px;
             position: relative;
-            /*border-radius: 10px;
-            background-color: #1E1E1E;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);*/
             background-color: transparent;
             display: flex;
             flex-wrap: wrap;
@@ -143,6 +142,8 @@
             margin-bottom: 20px;
             width: fit-content;
             min-width: 42%;
+            opacity: 0.8;
+            -moz-opacity: 0.8;
         }
 
             .dashboard-item h4 {
@@ -250,41 +251,6 @@
                 background-color: darkred;
             }
 
-        .table {
-            width: 100%;
-            color: #FFFFFF;
-            margin-bottom: 1rem;
-        }
-
-        .table-bordered {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-            background-color: #1c1c1c;
-            color: white;
-            border-radius: 10px;
-        }
-
-            .table-bordered th, .table-bordered td {
-                /*border: 1px solid #333;*/
-                padding: 12px 15px;
-            }
-
-            .table-bordered th {
-                background-color: #333;
-                color: OrangeRed;
-                text-transform: uppercase;
-                font-weight: 600;
-            }
-
-            .table-bordered tr:nth-child(even) {
-                background-color: #2b2b2b;
-            }
-
-            .table-bordered tr:hover {
-                background-color: #444;
-            }
-
         .panel-header {
             font-size: 26px;
             font-weight: bold;
@@ -303,6 +269,9 @@
         .main-content {
             color: #fff;
             transition: margin-left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
         }
 
         .sidebar-link {
@@ -312,6 +281,7 @@
         .navbar {
             background-color: #121212;
             /*border-bottom: 1px solid orangered;*/
+            width: 100vw;
             padding: 8px 12px;
         }
 
@@ -377,7 +347,7 @@
 
             .toggle-btn {
                 display: block;
-                margin-left: 20px;
+                margin-right: 0px;
             }
         }
 
@@ -428,16 +398,33 @@
         .toggle-btn {
             padding: 10px;
             color: silver;
-            margin-left: 680px;
+            margin-right: 50px;
             cursor: pointer;
             border: none;
             transition: transform 0.2s, background-color 0.2s;
+            display: block;
         }
 
             .toggle-btn:hover {
-                transform: scale(1.1);
                 color: white;
             }
+
+        @media (max-width: 768px) {
+            .toggle-btn {
+                margin-right: 0px; /* Adjust right margin for smaller screens */
+                padding: 8px; /* Adjust padding for smaller screens */
+                display: block; /* Keeps the button in-line with text/other elements */
+                position: relative; /* Position relative to ensure alignment */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .toggle-btn {
+                margin-right: 0px; /* Ensure there's no right margin on small screens */
+                padding: 6px; /* Smaller padding for very small screens */
+                width: 100vw; /* Make it full width */
+            }
+        }
 
         .dark-mode .container {
             background-color: #0F0F0F;
@@ -461,12 +448,16 @@
             }
 
         .container {
-            width: 100%;
-            min-height: 2000px;
-            max-height: 100%;
+            width: 100vw;
+            min-height: 100vh; /* Ensure the container takes up at least the viewport height */
             background-color: #0F0F0F;
             display: flex;
+            flex-direction: column; /* Stack content vertically */
             flex-wrap: wrap;
+            margin: auto;
+            padding: 40px;
+            box-sizing: border-box;
+            justify-content: space-between;
         }
 
         h1 {
@@ -497,6 +488,119 @@
             .sortable.desc:after {
                 content: '\25BC';
             }
+
+        .content-section {
+            display: flex;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            background-color: #ffffff;
+            transition: transform 0.3s ease;
+            min-height: 50px;
+        }
+
+            .content-section:hover {
+                transform: scale(1.02);
+            }
+
+            .content-section.dark {
+                background-color: #333333;
+                color: #f0f0f0;
+            }
+
+            .content-section img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+
+        .content-text {
+            flex: 1;
+            padding: 30px;
+        }
+
+            .content-text h2 {
+                color: #111111;
+                margin-bottom: 15px;
+                font-size: 24px;
+            }
+
+                .content-text h2.dark {
+                    color: #ffffff;
+                }
+
+            .content-text ul {
+                color: #666666;
+                padding-left: 20px;
+                list-style-type: disc;
+            }
+
+                .content-text ul.dark {
+                    color: #bbbbbb;
+                }
+
+            .content-text p {
+                margin-top: 15px;
+                color: #555555;
+            }
+
+                .content-text p.dark {
+                    color: #cccccc;
+                }
+        /* Footer Styles */
+        .site-footer {
+            background-color: #121212;
+            color: white;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0px;
+            width: 100vw;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .footer-divider {
+            width: 68%;
+            background-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            font-family: 'Calibri Light', sans-serif;
+            word-spacing: 1px;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+
+        .footer-nav {
+            font-family: 'Calibri Light', sans-serif;
+            word-spacing: 1px;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+
+            .footer-nav a {
+                color: white;
+                text-decoration: none;
+                margin: 0 10px;
+            }
+
+                .footer-nav a:hover {
+                    text-decoration: underline;
+                }
+
+        .site-footer {
+            margin-top: auto;
+        }
     </style>
     <script type="text/javascript">
         function preloader() {
@@ -560,7 +664,9 @@
                         <li>
                             <a runat="server" id="LogoutBTN" href="SignOut.aspx"><span class="glyphicon glyphicon-log-out"></span>Sign Out</a>
                         </li>
-                        <li><a id="toggleBtn" class="toggle-btn" onclick="toggleTheme()">Dark mode</a></li>
+                        <li>
+                            <a id="toggleBtn" class="toggle-btn" onclick="toggleTheme()"><span class="fas fa-sun"></span>Dark mode</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -571,20 +677,24 @@
                 <div style="height: 60px; background-color: #121212;"></div>
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
-                <footer style="background-color: #121212; height: 140px; color: white;">
-                    <center>
-                        <hr style="width: 68%; background-color: transparent;" />
-                        <p><font style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;">Copyright&copy; <%: DateTime.Now.Year %> Innovation quotient®. ALL RIGHTS RESERVED.</font></p>
-                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Default">Home</a>
-                        &nbsp;|&nbsp;
+
+                <footer class="site-footer">
+                    <div class="footer-content">
+                        <!-- Footer Links -->
+                        <nav class="footer-nav">
+                            <hr style="width: 100%; background-color: transparent;" />
+                            <p><font style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;">Copyright&copy; <%: DateTime.Now.Year %> Innovation quotient®. ALL RIGHTS RESERVED.</font></p>
+                            <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Default">Home</a>
+                            &nbsp;|&nbsp;
                         <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Dashboard" target="_blank">Dashboard</a>
-                        &nbsp;|&nbsp;
+                            &nbsp;|&nbsp;
                         <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="Contact_us.aspx" target="_blank">Contact Us</a>
-                        &nbsp;|&nbsp;
+                            &nbsp;|&nbsp;
                         <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Privacy_Policy" target="_blank">Privacy Policy</a>
-                        &nbsp;|&nbsp;
+                            &nbsp;|&nbsp;
                         <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Terms_and_Conditions" target="_blank">Terms and Conditions</a>
-                    </center>
+                        </nav>
+                    </div>
                 </footer>
             </div>
         </div>

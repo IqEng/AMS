@@ -287,9 +287,7 @@ namespace AMS
                         if (height == "0")
                         { height = "100%"; }
 
-                        string script = $@"
-    <div id='adZone'><iframe src='{TargetWeb}DisplayBanner.aspx?zoneId={zoneId}' 
-            width='{width}' height='{height}' frameborder='0' scrolling='no'></iframe></div>";
+                        string script = $@" <div id='adZone'><iframe src='{TargetWeb}DisplayBanner.aspx?zoneId={zoneId}' width='{width}' height='{height}' frameborder='0' scrolling='no'></iframe></div>";
 
                         Session["DownloadContent"] = script;
                         Session["DownloadFileName"] = $"adZone_{zoneId}.txt";
