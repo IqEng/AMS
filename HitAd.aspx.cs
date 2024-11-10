@@ -17,7 +17,7 @@ namespace AMS
             try
             {
                 string mask = Request.QueryString["zoneId"];
-                zoneId = Kripta.Decrypt(zoneId, "mNwg0rIP8");
+                zoneId = Kripta.Decrypt(mask, "mNwg0rIP8");
 
                 if (zoneId != null)
                 {
@@ -50,7 +50,7 @@ namespace AMS
                     Response.Redirect("~/Default.aspx", false);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 Response.Redirect("~/Default.aspx", false);
             }
