@@ -56,7 +56,6 @@ namespace AMS
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0;'>
                                 <a href='HitAd.aspx?zoneId={mask}' target='{Target}'>
@@ -70,7 +69,6 @@ namespace AMS
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0;'>
                                 <div style='width:100%; height:100%; position:relative;'>
@@ -85,7 +83,6 @@ namespace AMS
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0; display:flex; align-items:center; justify-content:center; height:100vh;'>
                                 <a href='HitAd.aspx?zoneId={mask}' target='{Target}' style='text-decoration:none; color:black; font-size:24px;'>
@@ -99,7 +96,6 @@ namespace AMS
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0; position:relative;'>
                                 <video width='100%' height='100%' controls style='z-index: 1; position:relative;'>
@@ -117,7 +113,6 @@ namespace AMS
                             Response.Write($@"
                             <html>
                             <head>
-                                <meta http-equiv='refresh' content='600'>
                             </head>
                             <body style='margin:0;padding:0; display:flex; align-items:center; justify-content:center; height:100vh; background-color:#f0f0f0; color:#333; font-family:Arial, sans-serif;'>
                                 <div style='text-align:center;'>
@@ -134,7 +129,6 @@ namespace AMS
                         Response.Write($@"
                         <html>
                         <head>
-                            <meta http-equiv='refresh' content='600'>
                         </head>
                         <body style='margin:0;padding:0; display:flex; align-items:center; justify-content:center; height:100vh; background-color:#f0f0f0; color:#333; font-family:Arial, sans-serif;'>
                             <div style='text-align:center;'>
@@ -151,7 +145,6 @@ namespace AMS
                     Response.Write($@"
                     <html>
                     <head>
-                        <meta http-equiv='refresh' content='600'>
                     </head>
                     <body style='margin:0;padding:0; display:flex; align-items:center; justify-content:center; height:100vh; background-color:#f0f0f0; color:#333; font-family:Arial, sans-serif;'>
                         <div style='text-align:center;'>
@@ -168,7 +161,6 @@ namespace AMS
                 Response.Write($@"
                 <html>
                 <head>
-                    <meta http-equiv='refresh' content='30'>
                 </head>
                 <body style='margin:0;padding:0; display:flex; align-items:center; justify-content:center; height:100vh; background-color:#f0f0f0; color:#333; font-family:Arial, sans-serif;'>
                     <div style='text-align:center;'>
