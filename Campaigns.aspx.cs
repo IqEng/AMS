@@ -116,7 +116,7 @@ namespace AMS
             }
             else
             {
-                string reslt = InsertRecord(txtCampaignName.Text.Trim(), 1, txtCampaignDescription.Text.Trim(), Convert.ToInt16(Idn.Value), txtStartDate.Text.Trim(), txtEndDate.Text.Trim());
+                string reslt = InsertRecord(txtCampaignName.Text.Trim(), 0, txtCampaignDescription.Text.Trim(), Convert.ToInt16(Idn.Value), txtStartDate.Text.Trim(), txtEndDate.Text.Trim());
                 if (reslt.Contains(" successful"))
                 {
                     ErrLbl.ForeColor = Color.Green;
@@ -151,7 +151,7 @@ namespace AMS
             int campaignId = Convert.ToInt32(CampaignGridView.DataKeys[e.RowIndex].Value);
 
             //TextBox txtPriority = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("txtPriority");
-            DropDownList ddlPriority = (DropDownList)CampaignGridView.Rows[e.RowIndex].FindControl("ddlPriority");
+            TextBox ddlPriority = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("ddlPercentage");
             TextBox txtUEndDate = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("txtUEndDate");
             int newPriority = Convert.ToInt32(ddlPriority.Text);
             string toDate = txtUEndDate.Text;
@@ -211,7 +211,7 @@ namespace AMS
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + " - NOTE: Value should be numerical number between 0 - 100" + "');", true);
                 return ex.Message;
             }
         }

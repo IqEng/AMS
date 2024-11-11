@@ -10,7 +10,7 @@
         <asp:UpdateProgress ID="UpdateProgress11" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
             <ProgressTemplate>
                 <div style="position: fixed; left: 0%; top: 0%; z-index: 999; height: 100%; width: 100%; border-style: none; background-color: Black; filter: alpha(opacity=60); opacity: 0.3; -moz-opacity: 0.5;">
-                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="86px" Height="86px"></asp:Image>
+                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="50px" Height="50px"></asp:Image>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
@@ -157,20 +157,20 @@
                                 </Columns>
                             </asp:GridView>
                             <script type="text/javascript">
-                        document.addEventListener('DOMContentLoaded', function () {
-                            const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
 
-                            const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-                                v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-                            )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+                                    const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+                                        v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+                                    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
 
-                            document.querySelectorAll('.sortable').forEach(th => th.addEventListener('click', (() => {
-                                const table = th.closest('table');
-                                Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
-                                    .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-                                    .forEach(tr => table.appendChild(tr));
-                            })));
-                        });
+                                    document.querySelectorAll('.sortable').forEach(th => th.addEventListener('click', (() => {
+                                        const table = th.closest('table');
+                                        Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+                                            .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+                                            .forEach(tr => table.appendChild(tr));
+                                    })));
+                                });
                             </script>
                         </div>
                     </ContentTemplate>

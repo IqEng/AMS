@@ -8,7 +8,7 @@
         <asp:UpdateProgress ID="UpdateProgress9" runat="server" AssociatedUpdatePanelID="UpdatePanel9">
             <ProgressTemplate>
                 <div style="position: fixed; left: 0%; top: 0%; z-index: 999; height: 100%; width: 100%; background-color: Black; opacity: 0.3;">
-                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="86px" Height="86px"></asp:Image>
+                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="50px" Height="50px"></asp:Image>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
@@ -31,11 +31,14 @@
                             </div>
                         </asp:Panel>
                     </div>
-                    <div class="dashboard-item" style="text-align: right; padding-right: 20px;">
+                    <div class="dashboard-item">
                         <h4>Our Locations</h4>
                         <p><strong>IQ Sri Lanka</strong><br>LEVEL 6, 299, UNION PLACE, Colombo 00200, Sri Lanka<br>Phone: +94 (11) 7 101 606<br>Email: info@iq-global.com</p>
+                        <hr />
                         <p><strong>IQ Dubai</strong><br>Yes Business Tower, Al Barsha Rd, Dubai, UAE<br>Email: info@iq-global.com</p>
+                        <hr />
                         <p><strong>IQ Europe</strong><br>Utrechtsestraat 93-1, 1017VK, Amsterdam, Netherlands<br>Email: info@iq-global.com</p>
+                        <hr />
                         <p><strong>General Inquiries</strong><br>Phone: +94 777 00 45 45<br>WhatsApp: Chat on WhatsApp</p>
                     </div>
                 </div>

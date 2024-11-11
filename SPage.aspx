@@ -5,8 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Registration Successful</title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<%--    <meta http-equiv="refresh" content="15; url=Default.aspx" />--%>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <%--    <meta http-equiv="refresh" content="15; url=Default.aspx" />--%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/bootstrap-datepicker.css" />
@@ -32,8 +32,11 @@
 <body>
     <form id="form1" runat="server">
         <div style="text-align: center;">
-            <br /><br /><br />
-            <h3 style="word-spacing:1px; letter-spacing: 0.5px; color: Highlight;" runat="server" id="Msgid"></h3><br />
+            <br />
+            <br />
+            <br />
+            <h3 style="word-spacing: 1px; letter-spacing: 0.5px; color: Highlight;" runat="server" id="Msgid"></h3>
+            <br />
             <h3><i>You are redirecting in </i>
                 <p id="demo"></p>
             </h3>

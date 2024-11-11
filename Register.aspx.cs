@@ -73,7 +73,7 @@ namespace AMS
             }
             else
             {
-                Insertuser(EmailTB.Text.Trim(), PasswordTB.Text.Trim(), NameTB.Text.Trim(), SupportDDL.SelectedValue.ToString(), PhoneTB.Text.Trim(), AddressTB.Text.Trim());
+                Task<string> task = Insertuser(EmailTB.Text.Trim(), PasswordTB.Text.Trim(), NameTB.Text.Trim(), SupportDDL.SelectedValue.ToString(), PhoneTB.Text.Trim(), AddressTB.Text.Trim());
             }
         }
 
@@ -109,7 +109,10 @@ namespace AMS
                     ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + "Check your email inbox and please click on the link to activate your account." + "');", true);
                     ErrTB.Text = "Please activate your account.";
 
-                    await SendEmailAsync(DName, EmailTB_, PasswordTB_, key);
+                    if (!EmailTB_.ToLower().Trim().StartsWith("secondary@"))
+                    {
+                        await SendEmailAsync(DName, EmailTB_, PasswordTB_, key);
+                    }
                 }
                 else
                 {

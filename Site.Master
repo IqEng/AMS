@@ -12,8 +12,9 @@
     </asp:PlaceHolder>
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
-    <link href="Images/AMS.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <link href="Images/AMS.png" rel="shortcut icon" type="image/x-icon" />
+<%--    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="Content/all.min.css" rel="stylesheet" />--%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -28,6 +29,35 @@
             padding: 0;
             font-family: Arial, sans-serif;
         }
+
+        .SBtn {
+            font-size: 14px;
+            width: 50%;
+            height: 42px;
+            color: White;
+            background-color: orangered;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            border-style: none;
+            font-family: Calibri Light;
+            word-spacing: 1px;
+            letter-spacing: 0.5px;
+            border-radius: 23px;
+        }
+
+            .SBtn:focus {
+                letter-spacing: 0.12em;
+                transition: letter-spacing 0.2s 0.05s ease;
+                cursor: pointer;
+                border-radius: 23px;
+            }
+
+            .SBtn:hover {
+                letter-spacing: 0.12em;
+                transition: letter-spacing 0.2s 0.05s ease;
+                cursor: pointer;
+                border-radius: 23px;
+            }
 
         .dashboard-grid {
             display: grid;
@@ -104,6 +134,86 @@
             opacity: 1;
         }
 
+        .navbar {
+            background-color: #B22222;
+            justify-content: center; /* Horizontally center */
+            align-items: center; /* Vertically center */
+            border-bottom: 1px solid #FF4500;
+            width: 100vw;
+            position: fixed;
+            z-index: 999;
+        }
+
+        .navbar-brand {
+            position: absolute;
+            bottom: -10px; /* Adjust based on the blur height */
+            left: 0;
+            width: 100%;
+            height: 48px; /* Height of the blurred area */
+            background: inherit; /* Inherits the navbar's background */
+            backdrop-filter: blur(10px); /* Adjust the blur strength as needed */
+            z-index: -1; /* Places it behind the navbar */
+        }
+
+/*            .navbar-brand img {
+                display: block;
+                height: auto;
+                max-height: 38px;
+            }
+*/
+        .navbar-header {
+            float: left;
+            width: 100%;
+            max-height: 50px;
+        }
+
+            .navbar-header .navbar-brand img {
+                display: block; /* Makes the image fill the anchor */
+                height: auto;
+                max-height: 60px;
+                padding: 10px 20px;
+                position: absolute;
+            }
+
+        .navbar-form {
+            width: 40%;
+            margin: 0 auto;
+        }
+
+            .navbar-form .input-group {
+                width: 100%;
+            }
+
+            .navbar-form .form-control {
+                border-radius: 2px 0 0 2px;
+                box-shadow: none;
+                border-right: none;
+            }
+
+            .navbar-form .btn {
+                border-radius: 0 2px 2px 0;
+                background-color: #f8f8f8;
+                border: 1px solid #ccc;
+                border-left: none;
+            }
+
+                .navbar-form .btn:hover {
+                    background-color: #e8e8e8;
+                }
+
+        .navbar-right {
+            padding-right: 10px;
+        }
+
+            .navbar-right .glyphicon {
+                font-size: 18px;
+                color: #fff;
+            }
+
+        .navbar-nav > li > .dropdown-toggle:hover {
+            color: #ff9800; /* Change text color on hover */
+        }
+
         .blurred-background {
         }
 
@@ -134,14 +244,14 @@
         }
 
         .dashboard-item {
-            padding: 20px;
+            padding: 10px;
             background-color: #252525;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             color: #FFFFFF;
             margin-bottom: 20px;
             width: fit-content;
-            min-width: 42%;
+            min-width: calc(42vw);
             opacity: 0.8;
             -moz-opacity: 0.8;
         }
@@ -279,10 +389,13 @@
         }
 
         .navbar {
-            background-color: #121212;
-            /*border-bottom: 1px solid orangered;*/
+            background-color: #B22222;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #FF4500;
             width: 100vw;
-            padding: 8px 12px;
+            position: fixed;
+            z-index: 999;
         }
 
         .navbar-header .navbar-brand img {
@@ -345,9 +458,34 @@
                     margin: 0;
                 }
 
+            .navbar {
+                width: 98vw;
+            }
+
             .toggle-btn {
                 display: block;
                 margin-right: 0px;
+            }
+
+            .dashboard-item {
+                min-width: calc(86vw);
+            }
+
+
+            .centered-grid {
+                display: flex;
+                flex-wrap: wrap;
+                /*grid-template-columns: repeat(3, 1fr);*/
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                padding: 10px;
+                margin-top: 0px;
+                width: calc(100vw);
+            }
+
+            .centered-square {
+                width: calc(82vw);
             }
         }
 
@@ -545,51 +683,46 @@
                 color: #555555;
             }
 
-                .content-text p.dark {
-                    color: #cccccc;
-                }
-        /* Footer Styles */
+        .conte /* Footer Styles */
         .site-footer {
             background-color: #121212;
-            color: white;
-            height: 140px;
+            color: gray;
+            height: 240px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-            position: relative;
-            bottom: 0px;
-            width: 100vw;
+            position: relative; /* Can be changed to 'fixed' if you want it to always be at the bottom */
+            bottom: 0;
+            width: 100%; /* Use 100% to avoid any overflow issues */
+            margin-top: auto; /* Ensures the footer is pushed to the bottom if in a flex layout */
         }
 
         .footer-content {
+            color: gray;
             text-align: center;
-            max-width: 100%;
+            width: 86vw;
+            max-height: 140px;
         }
 
         .footer-divider {
-            width: 68%;
+            width: 86vw;
             background-color: transparent;
             margin-bottom: 10px;
         }
 
-        .footer-text {
-            font-family: 'Calibri Light', sans-serif;
-            word-spacing: 1px;
-            letter-spacing: 0.5px;
-            font-size: 12px;
-        }
-
+        .footer-text,
         .footer-nav {
             font-family: 'Calibri Light', sans-serif;
             word-spacing: 1px;
             letter-spacing: 0.5px;
             font-size: 12px;
+            height: 140px;
         }
 
             .footer-nav a {
-                color: white;
+                color: gray;
                 text-decoration: none;
                 margin: 0 10px;
             }
@@ -627,6 +760,12 @@
             var currentTheme = document.body.classList.contains('dark-mode') ? 'Light mode' : 'Dark mode';
             button.textContent = currentTheme;
         }
+
+        function updateToggleButtonText() {
+            var button = document.getElementById('toggleBtnx');
+            var currentTheme = document.body.classList.contains('dark-mode') ? 'Light mode' : 'Dark mode';
+            button.textContent = currentTheme;
+        }
     </script>
 </head>
 <body class="dark-mode">
@@ -642,61 +781,59 @@
             <asp:Image ID="Ima" runat="server" ImageUrl="~/Images/loading.gif" Width="50px" Height="50px" />
         </div>
         <div id="MainDiv" style="display: none;">
-            <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar navbar-inverse navbar-fixed-top">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <a class="navbar-brand" href="Default.aspx">
+                        <img src="Images/AMS.png" height="120" alt="Adsmetriq Logo" />
+                    </a>
                 </div>
-                <div id="navbar-collapse" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a class="navbar-brand" href="Default.aspx">
-                            <img src="Images/AMS.png" height="23" alt="AMS Logo" /></a></li>
-                        <li><a href="Default.aspx"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-                        <li><a href="Dashboard.aspx"><span class="glyphicon glyphicon-dashboard"></span>Dashboard</a></li>
-                        <li><a href="Profile.aspx"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
-                        <li><a href="Contact_us.aspx"><span class="glyphicon glyphicon-envelope"></span>Contact Us</a></li>
-                        <li>
-                            <a runat="server" id="LoginBtn" href="Login.aspx"><span class="glyphicon glyphicon-log-in"></span>Sign In</a>
-                        </li>
-                        <li>
-                            <a runat="server" id="LogoutBTN" href="SignOut.aspx"><span class="glyphicon glyphicon-log-out"></span>Sign Out</a>
-                        </li>
-                        <li>
-                            <a id="toggleBtn" class="toggle-btn" onclick="toggleTheme()"><span class="fas fa-sun"></span>Dark mode</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <!-- Main content area -->
-            <div class="main-content">
-                <!-- Main content placeholder -->
-                <div style="height: 60px; background-color: #121212;"></div>
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                </asp:ContentPlaceHolder>
-
-                <footer class="site-footer">
-                    <div class="footer-content">
-                        <!-- Footer Links -->
-                        <nav class="footer-nav">
-                            <hr style="width: 100%; background-color: transparent;" />
-                            <p><font style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;">Copyright&copy; <%: DateTime.Now.Year %> Innovation quotient®. ALL RIGHTS RESERVED.</font></p>
-                            <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Default">Home</a>
-                            &nbsp;|&nbsp;
-                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Dashboard" target="_blank">Dashboard</a>
-                            &nbsp;|&nbsp;
-                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="Contact_us.aspx" target="_blank">Contact Us</a>
-                            &nbsp;|&nbsp;
-                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Privacy_Policy" target="_blank">Privacy Policy</a>
-                            &nbsp;|&nbsp;
-                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Terms_and_Conditions" target="_blank">Terms and Conditions</a>
-                        </nav>
+                <div class="navbar-collapse collapse">
+                    <div class="navbar-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="Dashboard.aspx"><span class="glyphicon glyphicon-dashboard"></span>Dashboard</a></li>
+                            <li><a href="Profile.aspx"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                            <li><a href="Contact_us.aspx"><span class="glyphicon glyphicon-envelope"></span>Contact Us</a></li>
+                            <li><a runat="server" id="LoginBtn" href="Login.aspx"><span class="glyphicon glyphicon-log-in"></span>Sign In</a></li>
+                            <li><a runat="server" id="LogoutBTN" href="SignOut.aspx"><span class="glyphicon glyphicon-log-out"></span>Sign Out</a></li>
+                            <li>
+                                <input type="button" id="Btnx" class="toggle-btn" href="javascript:void(0);" onclick="toggleTheme()" /></li>
+                        </ul>
                     </div>
-                </footer>
+                </div>
             </div>
+            <div class="main-content">
+                <div style="height: 60px;"></div>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+                <div class="container">
+                </div>
+            </div><center>
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <!-- Footer Links -->
+                    <nav class="footer-nav">
+                        <hr style="width: 100%; background-color: silver;" />
+                        <p><font style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;">Copyright&copy; <%: DateTime.Now.Year %> Innovation quotient®. ALL RIGHTS RESERVED.</font></p>
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Default">Home</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Dashboard" target="_blank">Dashboard</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="Contact_us.aspx" target="_blank">Contact Us</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Privacy_Policy" target="_blank">Privacy Policy</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Terms_and_Conditions" target="_blank">Terms and Conditions</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Privacy_Policy" target="_blank">Privacy Policy</a>
+                        &nbsp;|&nbsp;
+                        <a runat="server" style="font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px; font-size: 12px;" href="~/Terms_and_Conditions" target="_blank">Terms and Conditions</a>
+                    </nav>
+                </div>
+            </footer></center>
         </div>
     </form>
 </body>

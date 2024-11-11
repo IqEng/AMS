@@ -301,6 +301,7 @@
     <Content Include="404.html" />
     <Content Include="500.html" />
     <Content Include="AMS.ico" />
+    <Content Include="Content\all.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -317,6 +318,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Nadeo.css" />
     <Content Include="Images\report.jpg" />
     <Content Include="Images\profile.jpg" />
     <Content Include="Images\advertisers.jpg" />
@@ -537,13 +540,6 @@
       <DependentUpon>HitAd.aspx</DependentUpon>
     </Compile>
     <Compile Include="Serve.cs" />
-    <Compile Include="Site.Mobile.Master.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.designer.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
-    </Compile>
     <Compile Include="DisplayBanner.aspx.cs">
       <DependentUpon>DisplayBanner.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -721,7 +717,6 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
-    <Content Include="Site.Mobile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

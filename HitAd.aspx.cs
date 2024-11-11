@@ -51,7 +51,7 @@ namespace AMS
                     Response.Redirect("~/Default.aspx", false);
                 }
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
                 Response.Redirect("~/Default.aspx", false);
             }

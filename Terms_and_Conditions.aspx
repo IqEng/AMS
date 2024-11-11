@@ -5,7 +5,7 @@
         <asp:UpdateProgress ID="UpdateProgress2" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
             <ProgressTemplate>
                 <div style="position: fixed; left: 0%; top: 0%; z-index: 999; height: 100%; width: 100%; border-style: none; background-color: Black; filter: alpha(opacity=60); opacity: 0.3; -moz-opacity: 0.5;">
-                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="86px" Height="86px"></asp:Image>
+                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="50px" Height="50px"></asp:Image>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
@@ -121,8 +121,7 @@
                                 <p>We reserve the right to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to the new terms taking effect. By continuing to use the Service after revisions, you agree to the revised terms.</p>
 
                                 <h2>Contact Us</h2>
-                                <p>If you have any questions about these Terms and Conditions, you can contact us:</p>
-                                <p>By email: <a href="mailto:contact@adsmetriq.com">contact@adsmetriq.com</a></p>
+                                <p>If you have any questions about these Terms and Conditions, you can contact us by clicking <a href="Contact_us.aspx">here</a></p>
                         </td>
                         <td style="width: 10%; height: 100%;">&nbsp;</td>
                     </tr>

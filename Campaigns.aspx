@@ -9,7 +9,7 @@
         <asp:UpdateProgress ID="UpdateProgress8" runat="server" AssociatedUpdatePanelID="UpdatePanel8">
             <ProgressTemplate>
                 <div style="position: fixed; left: 0%; top: 0%; z-index: 999; height: 100%; width: 100%; border-style: none; background-color: Black; filter: alpha(opacity=60); opacity: 0.3; -moz-opacity: 0.5;">
-                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="86px" Height="86px"></asp:Image>
+                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="50px" Height="50px"></asp:Image>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
@@ -44,24 +44,41 @@
                             <asp:GridView ID="CampaignGridView" AllowPaging="True" DataKeyNames="Id" PageSize="10" OnPageIndexChanging="CampaignGridView_PageIndexChanging" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-dark table-hover" OnRowEditing="CampaignGridView_RowEditing" OnRowUpdating="CampaignGridView_RowUpdating" OnRowCancelingEdit="CampaignGridView_RowCancelingEdit">
                                 <RowStyle BorderStyle="inset" BorderColor="white" />
                                 <Columns>
+                                    <asp:TemplateField HeaderText="Website" HeaderStyle-CssClass="sortable">
+                                        <ItemTemplate>
+                                            <span style="background-color: transparent;" title='<%# Eval("Website") %>'><%# Eval("Website") %></span>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Zone" HeaderStyle-CssClass="sortable">
+                                        <ItemTemplate>
+                                            <span style="background-color: transparent;" title='<%# Eval("Zone") %>'><%# Eval("Zone") %></span>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Campaign Name" HeaderStyle-CssClass="sortable">
                                         <ItemTemplate>
                                             <span style="background-color: transparent;" title='<%# Eval("CampaignName") %>'><%# Eval("CampaignName") %></span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:CommandField HeaderText="Edit" ShowEditButton="True" />
-                                    <asp:TemplateField HeaderText="Priority" HeaderStyle-CssClass="sortable">
+                                    <asp:TemplateField HeaderText="Percentage" HeaderStyle-CssClass="sortable">
                                         <ItemTemplate>
-                                            <span style="background-color: transparent;" title='<%# Eval("Priority") %>'><%# Eval("Priority") %></span>
+                                            <span style="background-color: transparent;" title='<%# Eval("Percentage") %>'><%# Eval("Percentage") %></span>
                                         </ItemTemplate>
                                         <EditItemTemplate>
-                                            <asp:DropDownList ID="ddlPriority" runat="server" CssClass="form-control" SelectedValue='<%# Eval("Priority") %>'>
-                                                <asp:ListItem Value="1">1</asp:ListItem>
-                                                <asp:ListItem Value="2">2</asp:ListItem>
-                                                <asp:ListItem Value="3">3</asp:ListItem>
-                                                <asp:ListItem Value="4">4</asp:ListItem>
-                                                <asp:ListItem Value="5">5</asp:ListItem>
-                                            </asp:DropDownList>
+                                            <asp:TextBox ID="ddlPercentage" runat="server" CssClass="form-control" SelectedValue='<%# Eval("Percentage") %>'></asp:TextBox>
+                                        </EditItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Start Date" HeaderStyle-CssClass="sortable">
+                                        <ItemTemplate>
+                                            <span style="background-color: transparent;" title='<%# Eval("StartDate") %>'><%# Eval("StartDate") %></span>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="End Date" HeaderStyle-CssClass="sortable">
+                                        <ItemTemplate>
+                                            <span style="background-color: transparent;" title='<%# Eval("EndDate") %>'><%# Eval("EndDate") %></span>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:TextBox ID="txtUEndDate" runat="server" CssClass="form-control" Text='<%# Eval("EndDate") %>' SelectedValue='<%# Eval("EndDate") %>'></asp:TextBox>
                                         </EditItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Advertiser" HeaderStyle-CssClass="sortable">
@@ -74,30 +91,10 @@
                                             <span style="background-color: transparent;" title='<%# Eval("CreatedBy") %>'><%# Eval("CreatedBy") %></span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Created Date" HeaderStyle-CssClass="sortable">
+                                    <asp:TemplateField HeaderText="Created On" HeaderStyle-CssClass="sortable">
                                         <ItemTemplate>
                                             <span style="background-color: transparent;" title='<%# Eval("CreatedDate") %>'><%# Eval("CreatedDate") %></span>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Start Date" HeaderStyle-CssClass="sortable">
-                                        <ItemTemplate>
-                                            <span style="background-color: transparent;" title='<%# Eval("StartDate") %>'><%# Eval("StartDate") %></span>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="End Date" HeaderStyle-CssClass="sortable">
-                                        <ItemTemplate>
-                                            <span style="background-color: transparent;" title='<%# Eval("EndDate") %>'><%# Eval("EndDate") %></span>
-                                        </ItemTemplate>
-                                        <EditItemTemplate>
-                                            <asp:TextBox
-                                                ID="txtUEndDate"
-                                                runat="server"
-                                                TextMode="Date"
-                                                Width="230"
-                                                CssClass="form-control"
-                                                Text='<%# Bind("EndDate", "{0:yyyy-MM-dd}") %>'
-                                                Placeholder="YYYY-MM-DD *" />
-                                        </EditItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Status" HeaderStyle-CssClass="sortable">
                                         <ItemTemplate>

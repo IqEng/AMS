@@ -5,49 +5,19 @@
         <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="UpdatePanel4">
             <ProgressTemplate>
                 <div style="position: fixed; left: 0%; top: 0%; z-index: 999; height: 100%; width: 100%; border-style: none; background-color: Black; filter: alpha(opacity=60); opacity: 0.3; -moz-opacity: 0.5;">
-                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="86px" Height="86px"></asp:Image>
+                    <asp:Image ID="ImageLodinggif" Style="position: fixed; left: 48%; top: 48%; z-index: 1000;" runat="server" ImageUrl="~/Images/loading.gif" Width="50px" Height="50px"></asp:Image>
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
         <asp:UpdatePanel ID="UpdatePanel4" runat="server">
             <ContentTemplate>
-                <style>
-                    .SBtn {
-                        font-size: 14px;
-                        width: 50%;
-                        height: 42px;
-                        color: White;
-                        background-color: orangered;
-                        letter-spacing: 0.08em;
-                        cursor: pointer;
-                        border-style: none;
-                        font-family: Calibri Light;
-                        word-spacing: 1px;
-                        letter-spacing: 0.5px;
-                        border-radius: 23px;
-                    }
-
-                        .SBtn:focus {
-                            letter-spacing: 0.12em;
-                            transition: letter-spacing 0.2s 0.05s ease;
-                            cursor: pointer;
-                            border-radius: 23px;
-                        }
-
-                        .SBtn:hover {
-                            letter-spacing: 0.12em;
-                            transition: letter-spacing 0.2s 0.05s ease;
-                            cursor: pointer;
-                            border-radius: 23px;
-                        }
-                </style>
                 <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-position: center;">
                     <div class="masterpages">
                         <div style="text-align: center;">
                             <asp:HiddenField ID="HF" runat="server" />
                             <br />
                             <br />
-                            <img src="Images/AMS.png" style="height: 42px;" /><br />
+                            <img src="Images/AMS.png" style="height: 50px; background-color:silver;" /><br />
                             <br />
                             <asp:Label ID="Label4" runat="server" Text="IQ - Ad Management System" ForeColor="White" Font-Size="17px"></asp:Label>
                             <div style="height: 23px;"></div>
