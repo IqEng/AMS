@@ -192,9 +192,10 @@ namespace AMS
                 Directory.CreateDirectory(folderPath);
             }
 
-            string key = GenerateRandomKey(50).Substring(0, 7);
+            string key = GenerateRandomKeyNew(50).Substring(0, 7);
             //string filenme = $"{CampaignDDL.SelectedValue}_{WebsiteDDL.SelectedValue}_{ZonesDDL.SelectedValue}_{key}{fileExtension}";
-            string filenme = $"{CampaignDDL.SelectedValue}_{key}_{ZonesDDL.SelectedValue}_{key}{fileExtension}";
+            string LocKey = $"{CampaignDDL.SelectedValue}_{ZonesDDL.SelectedValue}_{key}";
+            string filenme = $"{CampaignDDL.SelectedValue}_{ZonesDDL.SelectedValue}_{key}{fileExtension}";
             string savePath = Path.Combine(folderPath, filenme);
 
             bool proceed = false;
@@ -203,7 +204,7 @@ namespace AMS
             {
                 if (fileExtension == ".zip")
                 {
-                    string extractPath = Path.Combine(folderPath, key);
+                    string extractPath = Path.Combine(folderPath, LocKey);
                     if (!Directory.Exists(extractPath))
                     {
                         Directory.CreateDirectory(extractPath);
@@ -319,7 +320,15 @@ namespace AMS
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[new Random().Next(s.Length)]).ToArray());
         }
-
+        private static string GenerateRandomKeyNew(int length)
+        {
+            byte[] buff = new byte[length];
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(buff);
+            }
+            return BitConverter.ToString(buff).Replace("-", "");
+        }
         public string InsertRecord(string filenme, string WebsiteId, string CampaignDDLVlu, string ZonesDDLVlu, string ddlBannerTypeVlu, string ddlTargetVlu, string txtBannerLinkVlu, string txtBannerNameVlu)
         {
             try

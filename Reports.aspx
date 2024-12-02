@@ -73,7 +73,7 @@
                         <asp:Label ID="ReportDateLabel" runat="server" Text="" Style="color: black;" />
                         <br />
                         <br />
-                        <asp:GridView ID="DynamicReportGridView" AllowPaging="True" PageSize="10" runat="server" AutoGenerateColumns="True" CssClass="table table-bordered table-striped table-hover">
+                        <asp:GridView ID="DynamicReportGridView" runat="server" AutoGenerateColumns="True" CssClass="table table-bordered table-striped table-hover">
                         </asp:GridView>
                     </ContentTemplate>
                 </asp:UpdatePanel>

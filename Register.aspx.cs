@@ -21,7 +21,7 @@ namespace AMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //string TargetWeb = ConfigurationManager.AppSettings["TargetWeb"];
         }
         protected void RegBTN_Click(object sender, EventArgs e)
         {
