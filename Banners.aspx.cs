@@ -243,7 +243,7 @@ namespace AMS
                         }
 
                         File.WriteAllText(mainHtmlFile, htmlContent);
-                        filenme = $"{key}/{htmlFileName}";
+                        filenme = $"{LocKey}/{htmlFileName}";
                         ErrLbl.Text = "File uploaded and extracted successfully!";
                         proceed = true;
                     }
