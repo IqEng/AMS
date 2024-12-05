@@ -804,6 +804,59 @@ namespace AMS
                 con.Close();
             }
         }
+        public string updateWebsite(string spname, string WebsiteId, string WebsiteUrl, decimal budget, string TargetFrame, int UserId)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlTransaction trn = con.BeginTransaction();
+
+                SqlCommand cmd = new SqlCommand("updateWebsite", con, trn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@WebsiteId", SqlDbType.Int).Value = WebsiteId.Trim();
+                cmd.Parameters.Add("@WebsiteUrl", SqlDbType.VarChar).Value = WebsiteUrl.Trim();
+                cmd.Parameters.Add("@Budget", SqlDbType.Decimal).Value = budget;
+                cmd.Parameters.Add("@TargetFrame", SqlDbType.Int).Value = TargetFrame;
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = UserId;
+
+                try
+                {
+                    int cunt = cmd.ExecuteNonQuery();
+                    if (cunt > 0)
+                    {
+                        trn.Commit();
+                        return "Website has been updated successfully.";
+                    }
+                    else
+                    {
+                        trn.Rollback();
+                        return "Website update process unsuccessful.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    trn.Rollback();
+                    if (ex.Message.Contains("PRIMARY KEY"))
+                    {
+                        return "Website already exists.";
+                    }
+                    else
+                    {
+                        return ex.Message + " - " + "Operation unsuccessful.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message + " - " + "Website update process unsuccessful.";
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         public DataTable getSecondaryUsersById(string spname, int UserId)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
@@ -850,6 +903,114 @@ namespace AMS
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@AdvertiserId", SqlDbType.Int).Value = UserId;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                dr.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else
+                {
+                    DataTable dtx = new DataTable();
+                    return dtx;
+                }
+            }
+            catch
+            {
+                DataTable dtx = new DataTable();
+                return dtx;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public DataTable getZoneByAdvertiserId(string spname, int UserId)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(spname, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@AdvertiserId", SqlDbType.Int).Value = UserId;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                dr.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else
+                {
+                    DataTable dtx = new DataTable();
+                    return dtx;
+                }
+            }
+            catch
+            {
+                DataTable dtx = new DataTable();
+                return dtx;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public DataTable getWebsiteDetailsById(string spname, int webid)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(spname, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@WebsiteId", SqlDbType.Int).Value = webid;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                dr.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else
+                {
+                    DataTable dtx = new DataTable();
+                    return dtx;
+                }
+            }
+            catch
+            {
+                DataTable dtx = new DataTable();
+                return dtx;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public DataTable getZoneDetailsById(string spname, int zid)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(spname, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@ZoneId", SqlDbType.Int).Value = zid;
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
@@ -1042,7 +1203,7 @@ namespace AMS
                 con.Close();
             }
         }
-        public string updateProfileById(string spname, string profileDescription, int UserId)
+        public string updateProfileById(string spname, string profileDescription, string profilePhone, string profileAddress, int UserId)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
             try
@@ -1054,6 +1215,8 @@ namespace AMS
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@Description", SqlDbType.Char).Value = profileDescription;
+                cmd.Parameters.Add("@Phone", SqlDbType.Char).Value = profilePhone;
+                cmd.Parameters.Add("@Address", SqlDbType.VarChar).Value = profileAddress;
                 cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = UserId;
 
                 try
@@ -1354,6 +1517,61 @@ namespace AMS
                     {
                         trn.Rollback();
                         return "Zone creation process unsuccessful.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    trn.Rollback();
+                    if (ex.Message.Contains("PRIMARY KEY"))
+                    {
+                        return "Zone already exists.";
+                    }
+                    else
+                    {
+                        return ex.Message + " - " + "Operation unsuccessful.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message + " - " + "Operation unsuccessful.";
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public string UpdateZone(string spname, string ZoneDDL_, string Description, string ZoneTypeId, string ZoneSizeId, int mWidth, int mHeight, int Id)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlTransaction trn = con.BeginTransaction();
+
+                SqlCommand cmd = new SqlCommand("updateZoneDetailsById", con, trn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@ZoneId", SqlDbType.Int).Value = ZoneDDL_.Trim();
+                cmd.Parameters.Add("@Description", SqlDbType.VarChar).Value = Description.Trim();
+                cmd.Parameters.Add("@ZoneTypeId", SqlDbType.Char).Value = ZoneTypeId.Trim();
+                cmd.Parameters.Add("@ZoneSizeId", SqlDbType.Char).Value = ZoneSizeId.Trim();
+                cmd.Parameters.Add("@mWidth", SqlDbType.Int).Value = mWidth;
+                cmd.Parameters.Add("@mHeight", SqlDbType.Int).Value = mHeight;
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = Id;
+
+                try
+                {
+                    int cunt = cmd.ExecuteNonQuery();
+                    if (cunt > 0)
+                    {
+                        trn.Commit();
+                        return "Zone has been updated successfully.";
+                    }
+                    else
+                    {
+                        trn.Rollback();
+                        return "Zone update process unsuccessful.";
                     }
                 }
                 catch (Exception ex)

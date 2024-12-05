@@ -41,6 +41,32 @@
                             <asp:Button ID="CreateWebsiteButton" runat="server" CssClass="btn-primary" Text="Create Website" OnClick="CreateWebsiteButton_Click" />
                         </asp:Panel>
                     </div>
+                    
+                    <div class="dashboard-item">
+                        <h4>Edit Website</h4>
+                        <asp:Panel ID="Panel2" runat="server">
+                                <asp:DropDownList ID="WebsiteDDL" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="WebsiteDDL_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            <br />
+                            <asp:TextBox ID="Websiteurled" runat="server" CssClass="form-control" Placeholder="Website URL *" MaxLength="60" />
+                            <br />
+                            <asp:TextBox ID="Budgeted" runat="server" CssClass="form-control" Width="230" Placeholder="Budget" TextMode="Number" />
+                            <br />
+                            <div class="form-group">
+                                <asp:Label ID="Label1" runat="server" Text="Target frame:" />
+                                <asp:DropDownList ID="TargetDDL" runat="server" CssClass="form-control">
+                                    <asp:ListItem Text="-Select-" Selected="True" Value="0" />
+                                    <asp:ListItem Text="Default" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="New Window" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="Same Window" Value="3"></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="form-group text-center">
+                                <asp:Label ID="EditLbl" runat="server" Height="15px" BackColor="Transparent" Text="" ForeColor="Red" Font-Size="Smaller"></asp:Label>
+                            </div>
+                            <asp:Button ID="EditBtn" runat="server" CssClass="btn-primary" Text="Update Website" OnClick="EditBtn_Click" />
+                        </asp:Panel>
+                    </div>
                 </div>
                 <div class="dashboard-section">
                     <div class="dashboard-item">

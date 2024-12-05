@@ -71,11 +71,11 @@
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="lblProfilePhone" runat="server" Text="Phone Number:" />
-                                    <asp:TextBox ID="profilePhone" runat="server" CssClass="form-control" ForeColor="Black" Placeholder="Phone Number*" Enabled="false" />
+                                    <asp:TextBox ID="profilePhone" runat="server" CssClass="form-control" ForeColor="Black" Placeholder="Phone Number*" Enabled="true" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Label ID="lblProfileAddress" runat="server" Text="Address:" />
-                                    <asp:TextBox ID="profileAddress" runat="server" CssClass="form-control" ForeColor="Black" Placeholder="Address*" TextMode="MultiLine" Enabled="false" />
+                                    <asp:TextBox ID="profileAddress" runat="server" CssClass="form-control" ForeColor="Black" Placeholder="Address*" TextMode="MultiLine" Enabled="true" />
                                 </div>
                                 <div class="form-group text-center">
                                     <asp:Label ID="ErrTB" runat="server" Height="15px" BackColor="Transparent" Text="" ForeColor="Red" Font-Size="Smaller"></asp:Label>

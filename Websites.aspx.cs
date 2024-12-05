@@ -62,6 +62,8 @@ namespace AMS
                     WebsiteGridView.DataSource = dt;
                     WebsiteGridView.DataBind();
                 }
+
+                BindDropDowns();
             }
             catch (Exception ex)
             {
@@ -106,13 +108,13 @@ namespace AMS
             {
                 ErrLbl.Text = "Enter Website URL!";
             }
-            else if (TargetFrameDropDownList.Text.Trim() == "")
-            {
-                ErrLbl.Text = "Enter Target Frame!";
-            }
             else if (txtCampaignBudget.Text.Trim() == "")
             {
                 ErrLbl.Text = "Enter Campaign Budget!";
+            }
+            else if (TargetFrameDropDownList.SelectedValue == "0")
+            {
+                ErrLbl.Text = "Enter Target Frame!";
             }
             else
             {
@@ -131,6 +133,7 @@ namespace AMS
                     TargetFrameDropDownList.SelectedIndex = 0;
                     NameTextBox.Text = "";
                     WebsiteUrlTextBox.Text = "";
+                    txtCampaignBudget.Text = "";
                 }
                 else
                 {
@@ -179,6 +182,129 @@ namespace AMS
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
                 return ex.Message;
+            }
+        }
+        public string UpdateRecord(string WebId_, string WebsiteUrlTextBox_, string TargetFrameDropDownList_, string bdget)
+        {
+            try
+            {
+                decimal budget_ = 0;
+                decimal.TryParse(bdget, out budget_);
+
+                Serve apir = new Serve();
+                string result = apir.updateWebsite("updateWebsite", WebId_, WebsiteUrlTextBox_, budget_, TargetFrameDropDownList_, Convert.ToInt16(Idn.Value));
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+                return ex.Message;
+            }
+        }
+
+        private void BindDropDowns()
+        {
+            try
+            {
+                DataTable dtc = new DataTable();
+                Serve apir = new Serve();
+                dtc = apir.getWebsiteByAdvertiserId("getWebsiteByAdvertiserId", Convert.ToInt16(Idn.Value));
+
+                if (dtc.Rows.Count > 0)
+                {
+                    WebsiteDDL.DataValueField = "Id";
+                    WebsiteDDL.DataTextField = "Name";
+                    WebsiteDDL.DataSource = dtc;
+                    WebsiteDDL.DataBind();
+                    WebsiteDDL.SelectedIndex = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+            }
+        }
+
+        protected void WebsiteDDL_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EditLbl.Text = "";
+            if (WebsiteDDL.SelectedIndex > 0)
+            {
+                try
+                {
+                    DataTable dtc = new DataTable();
+                    Serve apir = new Serve();
+                    dtc = apir.getWebsiteDetailsById("getWebsiteDetailsById", Convert.ToInt16(WebsiteDDL.SelectedValue));
+
+                    if (dtc.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dtc.Rows)
+                        {
+                            Websiteurled.Text = dr["WebsiteUrl"].ToString().Trim();
+                            Budgeted.Text = dr["Budget"].ToString().Trim();
+                            TargetDDL.SelectedValue = dr["TargetFrame"].ToString().Trim();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+                }
+            }
+            else
+            {
+                WebsiteDDL.SelectedIndex = 0;
+                TargetDDL.SelectedIndex = 0;
+                Budgeted.Text = "";
+                Websiteurled.Text = "";
+            }
+        }
+
+        protected void EditBtn_Click(object sender, EventArgs e)
+        {
+            EditLbl.ForeColor = Color.Red;
+
+            if (WebsiteDDL.SelectedIndex < 0)
+            {
+                EditLbl.Text = "Select a Website!";
+            }
+            else if (Websiteurled.Text.Trim() == "")
+            {
+                EditLbl.Text = "Enter Website URL!";
+            }
+            else if (Budgeted.Text.Trim() == "")
+            {
+                EditLbl.Text = "Enter Campaign Budget!";
+            }
+            else if (TargetDDL.SelectedValue == "0")
+            {
+                EditLbl.Text = "Enter Target Frame!";
+            }
+            else
+            {
+                PostAPI apir = new PostAPI();
+                string reslt = "";
+
+                reslt = UpdateRecord(WebsiteDDL.SelectedValue.ToString().Trim(), Websiteurled.Text.Trim(), TargetDDL.SelectedValue.ToString().Trim(), Budgeted.Text.Trim());
+                if (reslt.Contains(" successful"))
+                {
+                    EditLbl.ForeColor = Color.Green;
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + reslt + "');", true);
+                    EditLbl.Text = reslt;
+
+                    BindWebsiteGridView();
+
+                    WebsiteDDL.SelectedIndex = 0;
+                    TargetDDL.SelectedIndex = 0;
+                    Budgeted.Text = "";
+                    Websiteurled.Text = "";
+                }
+                else
+                {
+                    EditLbl.ForeColor = Color.Red;
+                    EditLbl.Text = reslt;
+                }
             }
         }
     }

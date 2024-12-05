@@ -67,6 +67,7 @@ namespace AMS
                 }
 
                 BindDropDowns();
+                BindZoneDropDown();
             }
             catch (Exception ex)
             {
@@ -88,7 +89,7 @@ namespace AMS
                     WebsiteDDL.DataTextField = "Name";
                     WebsiteDDL.DataSource = dtc;
                     WebsiteDDL.DataBind();
-                    WebsiteDDL.SelectedIndex = 0;
+                    WebsiteDDL.SelectedIndex = -1;
                 }
             }
             catch (Exception ex)
@@ -146,6 +147,10 @@ namespace AMS
             {
                 ErrLbl.Text = "Enter Zone Sizes!";
             }
+            else if ((ddlZoneSizeDDL.SelectedValue.ToString() == "-") && (txtWidth.Text.Trim() == "" || txtHeight.Text.Trim() == ""))
+            {
+                ErrLbl.Text = "Enter Custom Zone Sizes!";
+            }
             else
             {
                 PostAPI apir = new PostAPI();
@@ -161,7 +166,7 @@ namespace AMS
 
                     BindZoneGridView();
 
-                    WebsiteDDL.SelectedIndex = 0;
+                    WebsiteDDL.SelectedIndex = -1;
                     ddlZoneTypeDDL.SelectedIndex = 0;
                     ddlZoneSizeDDL.SelectedIndex = 0;
                     txtZoneDescription.Text = "";
@@ -316,6 +321,164 @@ namespace AMS
                 Response.AddHeader("Content-Disposition", $"attachment;filename={fileName}");
                 Response.Write(content);
                 Response.End();
+            }
+        }
+
+        private void BindZoneDropDown()
+        {
+            try
+            {
+                DataTable dtc = new DataTable();
+                Serve apir = new Serve();
+                dtc = apir.getZoneByAdvertiserId("getZoneByAdvertiserId", Convert.ToInt16(Idn.Value));
+
+                if (dtc.Rows.Count > 0)
+                {
+                    ZoneDDL.DataValueField = "Id";
+                    ZoneDDL.DataTextField = "Name";
+                    ZoneDDL.DataSource = dtc;
+                    ZoneDDL.DataBind();
+                    ZoneDDL.SelectedIndex = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+            }
+        }
+
+        protected void ZoneDDL_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Erred.Text = "";
+            if (ZoneDDL.SelectedIndex > 0)
+            {
+                try
+                {
+                    DataTable dtc = new DataTable();
+                    Serve apir = new Serve();
+                    dtc = apir.getZoneDetailsById("getZoneDetailsById", Convert.ToInt16(ZoneDDL.SelectedValue));
+
+                    if (dtc.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dtc.Rows)
+                        {
+                            Descriptioned.Text = dr["Description"].ToString().Trim();
+                            typeDDL.SelectedValue = dr["ZoneTypeId"].ToString().Trim();
+                            sizeDDL.SelectedValue = dr["ZoneSizeId"].ToString().Trim();
+
+                            if (sizeDDL.SelectedValue == "0")
+                            {
+                                sizeDDL.SelectedValue = "-";
+                                CustomW.Text = dr["mWidth"].ToString().Trim();
+                                CustomH.Text = dr["mHeight"].ToString().Trim();
+                            }
+                            else
+                            {
+                                CustomW.Text = "";
+                                CustomH.Text = "";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+                }
+            }
+            else
+            {
+                ZoneDDL.SelectedIndex = 0;
+                Descriptioned.Text = "";
+                typeDDL.SelectedIndex = 0;
+                sizeDDL.SelectedIndex = 0;
+                CustomW.Text = "";
+                CustomH.Text = "";
+            }
+        }
+
+        protected void UpdateBtn_Click(object sender, EventArgs e)
+        {
+            Erred.ForeColor = Color.Red;
+
+            if (ZoneDDL.SelectedValue.ToString() == "0")
+            {
+                Erred.Text = "Select a Zone!";
+            }
+            else if (typeDDL.SelectedValue.ToString() == "0")
+            {
+                Erred.Text = "Select Zone Type!";
+            }
+            else if (sizeDDL.SelectedValue.ToString() == "0")
+            {
+                Erred.Text = "Select Zone Size!";
+            }
+            else if ((sizeDDL.SelectedValue.ToString() == "0") && (CustomW.Text.Trim() == "" || CustomH.Text.Trim() == ""))
+            {
+                Erred.Text = "Enter Zone Sizes!";
+            }
+            else if ((sizeDDL.SelectedValue.ToString() == "-") && (CustomW.Text.Trim() == "" || CustomH.Text.Trim() == ""))
+            {
+                Erred.Text = "Enter Custom Zone Sizes!";
+            }
+            else
+            {
+                PostAPI apir = new PostAPI();
+                string reslt = "";
+
+                reslt = UpdateRecord(ZoneDDL.SelectedValue.ToString().Trim(), typeDDL.SelectedValue.ToString().Trim(), sizeDDL.SelectedValue.ToString().Trim(),
+                    Descriptioned.Text.Trim(), CustomW.Text.Trim(), CustomH.Text.Trim());
+                if (reslt.Contains(" successful"))
+                {
+                    Erred.ForeColor = Color.Green;
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + reslt + "');", true);
+                    Erred.Text = reslt;
+
+                    BindZoneGridView();
+
+                    ZoneDDL.SelectedIndex = -1;
+                    Descriptioned.Text = "";
+                    typeDDL.SelectedIndex = 0;
+                    sizeDDL.SelectedIndex = 0;
+                    CustomW.Text = "";
+                    CustomH.Text = "";
+                }
+                else
+                {
+                    Erred.ForeColor = Color.Red;
+                    Erred.Text = reslt;
+                }
+            }
+        }
+        public string UpdateRecord(string ZoneDDL_, string ddlZoneTypeDDL, string ddlZoneSizeDDL, string txtZoneDescription, string txtWidth, string txtHeight)
+        {
+            try
+            {
+                if (ddlZoneSizeDDL == "-")
+                {
+                    ddlZoneSizeDDL = txtWidth + "x" + txtHeight;
+                }
+                // Parse numeric values
+                int width = 0;
+                int height = 0;
+
+                // Try parsing the width and height values
+                int.TryParse(txtWidth, out width);
+                int.TryParse(txtHeight, out height);
+
+                Serve apir = new Serve();
+                string result = apir.UpdateZone("updateZone", ZoneDDL_,
+                    txtZoneDescription,
+                    ddlZoneTypeDDL,
+                    ddlZoneSizeDDL,
+                    width,
+                    height, Convert.ToInt16(Idn.Value));
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+                return ex.Message;
             }
         }
     }

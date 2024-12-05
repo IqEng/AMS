@@ -109,20 +109,32 @@ namespace AMS
         protected void UpdateProfileButton_Click(object sender, EventArgs e)
         {
             ErrTB.ForeColor = Color.Red;
-
-            Serve apir = new Serve();
-            string result = apir.updateProfileById("updateProfileById", profileDescription.Text, Convert.ToInt16(Idn.Value));
-
-            if (result.Contains(" successful"))
+            if (profilePhone.Text.Trim().Length <= 0)
             {
-                ErrTB.ForeColor = Color.Green;
-                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + result + "');", true);
-                ErrTB.Text = result;
+                ErrTB.ForeColor = Color.Red;
+                ErrTB.Text = "Phone number required!";
+            }
+            else if (profileAddress.Text.Trim().Length <= 0)
+            {
+                ErrTB.ForeColor = Color.Red;
+                ErrTB.Text = "Address required!";
             }
             else
             {
-                ErrTB.ForeColor = Color.Red;
-                ErrTB.Text = result;
+                Serve apir = new Serve();
+                string result = apir.updateProfileById("updateProfileById", profileDescription.Text, profilePhone.Text, profileAddress.Text, Convert.ToInt16(Idn.Value));
+
+                if (result.Contains(" successful"))
+                {
+                    ErrTB.ForeColor = Color.Green;
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + result + "');", true);
+                    ErrTB.Text = result;
+                }
+                else
+                {
+                    ErrTB.ForeColor = Color.Red;
+                    ErrTB.Text = result;
+                }
             }
         }
 

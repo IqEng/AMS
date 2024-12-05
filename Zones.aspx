@@ -77,6 +77,66 @@
                             <asp:Button ID="CreateZoneButton" runat="server" CssClass="btn-primary" Text="Create Zone" OnClick="CreateZoneButton_Click" />
                         </asp:Panel>
                     </div>
+                    
+                    <div class="dashboard-item">
+                        <h4>Edit Zone</h4>
+                        <asp:Panel ID="Panel2" runat="server">
+                            <div class="form-group">
+                                <asp:Label ID="Label1" runat="server" Text="Zone:" />
+                                <asp:DropDownList ID="ZoneDDL" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ZoneDDL_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </div>
+                            <asp:TextBox ID="Descriptioned" runat="server" CssClass="form-control" TextMode="MultiLine" Placeholder="Description" MaxLength="150" />
+                            <br />
+                            <div class="form-group">
+                                <asp:Label ID="Label2" runat="server" Text="Zone type:" />
+                                <asp:DropDownList ID="typeDDL" runat="server" CssClass="form-control">
+                                    <asp:ListItem Text="-Select-" Selected="True" Value="0" />
+                                    <asp:ListItem Text="Banner, Button or Rectangle" Value="Banner" />
+                                    <asp:ListItem Text="Interstitial or Floating DHTML" Value="Interstitial" />
+                                    <asp:ListItem Text="Text ad" Value="TextAd" />
+                                    <asp:ListItem Text="Email/Newsletter zone" Value="EmailNewsletter" />
+                                    <asp:ListItem Text="Inline Video ad" Value="InlineVideoAd" />
+                                    <asp:ListItem Text="Overlay Video ad" Value="OverlayVideoAd" />
+                                </asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <asp:Label ID="Label3" runat="server" Text="Size:" />
+                                <asp:DropDownList ID="sizeDDL" runat="server" CssClass="form-control">
+                                    <asp:ListItem Text="-Select-" Selected="True" Value="0" />
+                                    <asp:ListItem Text="Banner, Button or Rectangle" Value="Banner" />
+                                    <asp:ListItem Value="468x60" Text="IAB Full Banner (468 x 60)" />
+                                    <asp:ListItem Value="120x600" Text="IAB Skyscraper (120 x 600)" />
+                                    <asp:ListItem Value="728x90" Text="IAB Leaderboard (728 x 90)" />
+                                    <asp:ListItem Value="120x90" Text="IAB Button 1 (120 x 90)" />
+                                    <asp:ListItem Value="120x60" Text="IAB Button 2 (120 x 60)" />
+                                    <asp:ListItem Value="234x60" Text="IAB Half Banner (234 x 60)" />
+                                    <asp:ListItem Value="88x31" Text="IAB Micro Bar (88 x 31)" />
+                                    <asp:ListItem Value="125x125" Text="IAB Square Button (125 x 125)" />
+                                    <asp:ListItem Value="120x240" Text="IAB Vertical Banner (120 x 240)" />
+                                    <asp:ListItem Value="180x150" Text="IAB Rectangle (180 x 150)" />
+                                    <asp:ListItem Value="300x250" Text="IAB Medium Rectangle (300 x 250)" />
+                                    <asp:ListItem Value="336x280" Text="IAB Large Rectangle (336 x 280)" />
+                                    <asp:ListItem Value="240x400" Text="IAB Vertical Rectangle (240 x 400)" />
+                                    <asp:ListItem Value="250x250" Text="IAB Square Pop-up (250 x 250)" />
+                                    <asp:ListItem Value="160x600" Text="IAB Wide Skyscraper (160 x 600)" />
+                                    <asp:ListItem Value="720x300" Text="IAB Pop-Under (720 x 300)" />
+                                    <asp:ListItem Value="300x100" Text="IAB 3:1 Rectangle (300 x 100)" />
+                                    <asp:ListItem Value="-" Text="Custom" />
+                                </asp:DropDownList>
+                            </div>
+                            <div style="align-items:flex-start">
+                                <asp:Label ID="Label4" runat="server" Text="Custom:" CssClass="mr-2" />
+                                <asp:TextBox ID="CustomW" runat="server" CssClass="form-control mr-2" TextMode="Number" Width="250" Placeholder="Width" />
+                                <br />
+                                <asp:TextBox ID="CustomH" runat="server" CssClass="form-control" TextMode="Number" Width="250" Placeholder="Height" />
+                            </div><br />
+                            <div class="form-group text-center">
+                                <asp:Label ID="Erred" runat="server" Height="15px" BackColor="Transparent" Text="" ForeColor="Red" Font-Size="Smaller"></asp:Label>
+                            </div><br /><br /><br />
+                            <asp:Button ID="UpdateBtn" runat="server" CssClass="btn-primary" Text="Update Zone" OnClick="UpdateBtn_Click" />
+                        </asp:Panel>
+                    </div>
                 </div>
                 <div class="dashboard-section">
                     <div class="dashboard-item">
