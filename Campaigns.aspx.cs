@@ -112,7 +112,7 @@ namespace AMS
             }
             else if (Convert.ToDateTime(txtStartDate.Text.Trim()) > Convert.ToDateTime(txtEndDate.Text.Trim()))
             {
-                ErrLbl.Text = "The End Date should be greater than or equal to the Start Date!";
+                ErrLbl.Text = "The End Date should be greater than to the Start Date!";
             }
             else
             {
@@ -152,22 +152,32 @@ namespace AMS
 
             //TextBox txtPriority = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("txtPriority");
             TextBox ddlPriority = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("ddlPercentage");
+            TextBox txtUStartDate = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("txtUStartDate");
             TextBox txtUEndDate = (TextBox)CampaignGridView.Rows[e.RowIndex].FindControl("txtUEndDate");
+
             int newPriority = Convert.ToInt32(ddlPriority.Text);
+            string fromDate = txtUStartDate.Text;
             string toDate = txtUEndDate.Text;
 
-            string reslt = UpdateRecord(campaignId, newPriority, toDate, Convert.ToInt16(Idn.Value));
-            if (reslt.Contains(" successful"))
+            if (Convert.ToDateTime(fromDate.Trim()) > Convert.ToDateTime(toDate.Trim()))
             {
-                ErrLbl.ForeColor = Color.Green;
-                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + reslt + "');", true);
-
-                CampaignGridView.EditIndex = -1;
-                BindCampaignGridView();
+                ErrLbl.Text = "The End Date should be greater than to the Start Date!";
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + reslt + "');", true);
+                string reslt = UpdateRecord(campaignId, newPriority, toDate, Convert.ToInt16(Idn.Value));
+                if (reslt.Contains(" successful"))
+                {
+                    ErrLbl.ForeColor = Color.Green;
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + reslt + "');", true);
+
+                    CampaignGridView.EditIndex = -1;
+                    BindCampaignGridView();
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + reslt + "');", true);
+                }
             }
         }
 

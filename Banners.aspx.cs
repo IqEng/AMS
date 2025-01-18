@@ -1,18 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml.Linq;
 using System.IO.Compression;
-using System.Linq.Expressions;
 
 namespace AMS
 {
@@ -69,6 +64,7 @@ namespace AMS
                 
                 BindDropDowns();
                 getWebsites();
+                BindBannerDropDown();
             }
             catch (Exception ex)
             {
@@ -436,6 +432,242 @@ namespace AMS
         protected void WebsiteListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             getZones();
+        }
+        private void BindBannerDropDown()
+        {
+            try
+            {
+                DataTable dtc = new DataTable();
+                Serve apir = new Serve();
+                dtc = apir.getBannerByAdvertiserId("getBannerByAdvertiserId", Convert.ToInt16(Idn.Value));
+
+                if (dtc.Rows.Count > 0)
+                {
+                    BannerDDL.DataValueField = "Id";
+                    BannerDDL.DataTextField = "Name";
+                    BannerDDL.DataSource = dtc;
+                    BannerDDL.DataBind();
+                    BannerDDL.SelectedIndex = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+            }
+        }
+
+        protected void BannerDDL_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ErrE.Text = "";
+            if (BannerDDL.SelectedIndex > 0)
+            {
+                try
+                {
+                    DataTable dtc = new DataTable();
+                    Serve apir = new Serve();
+                    dtc = apir.getBannerDetailsById("getBannerDetailsById", Convert.ToInt16(BannerDDL.SelectedValue));
+
+                    if (dtc.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dtc.Rows)
+                        {
+                            BannerTypeDDL.SelectedValue = dr["BannerTypeId"].ToString().Trim();
+                            PointsE.Text = dr["BannerLink"].ToString().Trim();
+                            TargetDDL.SelectedValue = dr["Target"].ToString().Trim();
+                            CamZne.Value = dr["CamZne"].ToString().Trim();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+                }
+            }
+            else
+            {
+                BannerDDL.SelectedIndex = 0;
+                BannerTypeDDL.SelectedIndex = 0;
+                PointsE.Text = "";
+                TargetDDL.SelectedIndex = 0;
+                CamZne.Value = "";
+            }
+        }
+
+        protected void EditBtn_Click(object sender, EventArgs e)
+        {
+            ErrE.ForeColor = Color.Red;
+            ErrE.Text = string.Empty;
+
+            if (BannerDDL.SelectedValue == "0")
+            {
+                ErrE.Text = "Select a Banner!";
+                return;
+            }
+
+            if (BannerTypeDDL.SelectedValue == "0")
+            {
+                ErrE.Text = "Select a Banner Type!";
+                return;
+            }
+
+            if (!fileBannerUploadE.HasFile)
+            {
+                ErrE.Text = "Upload the Media!";
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(PointsE.Text))
+            {
+                ErrE.Text = "Enter the website link this banner points to!";
+                return;
+            }
+
+            if (TargetDDL.SelectedValue == "0")
+            {
+                ErrE.Text = "Select the Target!";
+                return;
+            }
+
+            string fileExtension = Path.GetExtension(fileBannerUploadE.FileName).ToLower();
+            string[] allowedExtensions = { ".html", ".htm", ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".txt", ".mp4", ".avi", ".mkv", ".mov", ".wmv", ".zip" };
+
+            if (!allowedExtensions.Contains(fileExtension))
+            {
+                ErrE.Text = "Invalid file type. Only HTML, Image, Text, and Video files are allowed.";
+                return;
+            }
+
+            if (fileBannerUploadE.PostedFile.ContentLength > 5242880)
+            {
+                ErrE.Text = "File size exceeds the 5MB limit.";
+                return;
+            }
+
+            string folderPath = Server.MapPath("~/Uploads/");
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            string key = GenerateRandomKeyNew(50).Substring(0, 7);
+            //string filenme = $"{CampaignDDL.SelectedValue}_{WebsiteDDL.SelectedValue}_{ZonesDDL.SelectedValue}_{key}{fileExtension}";
+            string LocKey = $"{CamZne.Value}{key}";
+            string filenme = $"{CamZne.Value}{key}{fileExtension}";
+            string savePath = Path.Combine(folderPath, filenme);
+
+            bool proceed = false;
+
+            try
+            {
+                if (fileExtension == ".zip")
+                {
+                    string extractPath = Path.Combine(folderPath, LocKey);
+                    if (!Directory.Exists(extractPath))
+                    {
+                        Directory.CreateDirectory(extractPath);
+                    }
+
+                    fileBannerUploadE.SaveAs(savePath);
+                    ZipFile.ExtractToDirectory(savePath, extractPath);
+
+                    string[] htmlFiles = Directory.GetFiles(extractPath, "*.html");
+                    if (htmlFiles.Length > 0)
+                    {
+                        string mainHtmlFile = htmlFiles[0];
+                        string htmlContent = File.ReadAllText(mainHtmlFile);
+                        string htmlFileName = Path.GetFileName(mainHtmlFile);
+
+                        string pattern = "src=\"";
+                        int index = 0;
+
+                        while ((index = htmlContent.IndexOf(pattern, index)) != -1)
+                        {
+                            int startIndex = index + pattern.Length;
+                            int endIndex = htmlContent.IndexOf("\"", startIndex);
+
+                            if (endIndex > startIndex)
+                            {
+                                string srcValue = htmlContent.Substring(startIndex, endIndex - startIndex);
+
+                                if (!srcValue.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    string newSrcValue = $"{extractPath}/{srcValue}";
+                                    htmlContent = htmlContent.Substring(0, startIndex) + newSrcValue + htmlContent.Substring(endIndex);
+                                }
+                            }
+
+                            index = endIndex + 1;
+                        }
+
+                        File.WriteAllText(mainHtmlFile, htmlContent);
+                        filenme = $"{LocKey}/{htmlFileName}";
+                        ErrE.Text = "File uploaded and extracted successfully!";
+                        proceed = true;
+                    }
+                    else
+                    {
+                        ErrE.Text = "HTML file not found in this attachment!";
+                        proceed = false;
+                    }
+                }
+                else
+                {
+                    fileBannerUploadE.SaveAs(savePath);
+                    ErrE.Text = "File uploaded successfully!";
+                    proceed = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrE.Text = $"An error occurred: {ex.Message}";
+                proceed = false;
+            }
+
+            if (proceed)
+            {
+                string result = "";
+                foreach (ListItem website in WebsiteListBox.Items)
+                {
+                    if (website.Selected)
+                    {
+                        result = InsertRecord(filenme, BannerDDL.SelectedValue.Trim(), BannerTypeDDL.SelectedValue.Trim(), PointsE.Text.Trim(), TargetDDL.SelectedValue.Trim());
+                    }
+                }
+
+                if (result.Contains(" successful"))
+                {
+                    ErrE.ForeColor = Color.Green;
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Alert", $"alert('{result}');", true);
+                    ErrE.Text = result;
+
+                    BindBannerGridView();
+
+                    BannerDDL.SelectedIndex = 0;
+                    BannerTypeDDL.SelectedIndex = 0;
+                    PointsE.Text = "";
+                    TargetDDL.SelectedIndex = 0;
+                }
+                else
+                {
+                    ErrE.Text = result;
+                }
+            }
+        }
+        public string UpdateRecord(string filenme, string BannerDDLVlu, string BannerTypeDDLVlu, string PointsEVlu, string TargetDDLVlu)
+        {
+            try
+            {
+                Serve apir = new Serve();
+                string result = apir.updateBanner("updateBannerDetailsById", filenme, Convert.ToInt16(BannerDDLVlu), BannerTypeDDLVlu, PointsEVlu, TargetDDLVlu, Convert.ToInt16(Idn.Value));
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Alert", "alert('" + ex.Message + "');", true);
+                return ex.Message;
+            }
         }
     }
 }

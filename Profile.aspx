@@ -62,7 +62,7 @@
                                     <asp:TextBox ID="profileDescription" runat="server" CssClass="form-control" ForeColor="Black" TextMode="MultiLine" MaxLength="500" Placeholder="Add a brief description about yourself" />
                                 </div>
                                 <div class="form-group">
-                                    <asp:Label ID="lblProfileSupport" runat="server" Text="Support Agency No:" />
+                                    <asp:Label ID="lblProfileSupport" runat="server" Text="Support Agency:" />
                                     <asp:TextBox ID="profileSupport" runat="server" CssClass="form-control" ForeColor="Black" Placeholder="Support Agency No*" Enabled="false" />
                                 </div>
                                 <div class="form-group">

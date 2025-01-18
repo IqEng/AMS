@@ -29,8 +29,8 @@
                             <div style="height: 14px;"></div>
                             <asp:DropDownList ID="SupportDDL" TabIndex="2" runat="server" Style="border-radius: 3px; background-color: Black; color: silver; border-color: gold; border-top-style: none; border-right-style: none; border-bottom-style: inset; border-width: thin; height: 24px; max-width: 32%; min-width: 280px; font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px;">
                                 <asp:ListItem Text="Select the Support Agency" Selected="True" Value="0"></asp:ListItem>
-                                <asp:ListItem Text="IQ -Digital Marketing" Value="1"></asp:ListItem>
-                                <asp:ListItem Text="Squared -Digital Marketing" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="IQ - Digital Marketing" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="Squared - Digital Marketing" Value="2"></asp:ListItem>
                             </asp:DropDownList>
                             <div style="height: 14px;"></div>
                             <asp:TextBox ID="EmailTB" ToolTip="Enter valied email, You will receive Activation link to this email!" TabIndex="4" BackColor="Transparent" ondrop="return false" ondragover="return false" placeholder="Email*" TextMode="Email" MaxLength="50" Style="border-radius: 3px; color: white; border-color: gold; border-top-style: none; border-right-style: none; border-bottom-style: inset; border-width: thin; height: 24px; max-width: 32%; min-width: 280px; font-family: Calibri Light; word-spacing: 1px; letter-spacing: 0.5px;" runat="server"></asp:TextBox>

@@ -5,7 +5,7 @@
         class="blurred-background">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <br />
-        <asp:HiddenField ID="Idn" runat="server" Value="InitialValue" />
+        <asp:HiddenField ID="Idn" runat="server" Value="InitialValue" /><asp:HiddenField ID="CamZne" runat="server" Value="" />
         <asp:UpdateProgress ID="UpdateProgress7" runat="server" AssociatedUpdatePanelID="UpdatePanel7">
             <ProgressTemplate>
                 <div style="position: fixed; left: 0%; top: 0%; z-index: 999; height: 100%; width: 100%; border-style: none; background-color: Black; filter: alpha(opacity=60); opacity: 0.3; -moz-opacity: 0.5;">
@@ -105,6 +105,83 @@
                 </asp:UpdatePanel>
                 <div class="form-group text-left">
                     <asp:Button ID="CreateBannerButton" runat="server" CssClass="btn-primary" Text="Create Banner" OnClick="CreateBannerButton_Click" />
+                </div>
+            </div>
+
+            <div class="dashboard-item">
+                <h4>Edit Banner</h4>
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                    <ContentTemplate>
+                        <div class="form-group">
+                            <asp:Label ID="Label9" runat="server" Text="Banner:" />
+                            <asp:ListBox ID="BannerDDL" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="BannerDDL_SelectedIndexChanged"></asp:ListBox>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <asp:Label ID="Label11" runat="server" Text="Banner Type:"></asp:Label>
+                            <asp:DropDownList ID="BannerTypeDDL" runat="server" CssClass="form-control">
+                                <asp:ListItem Text="-Select-" Selected="True" Value="0" />
+                                <asp:ListItem Text="HTML5" Value="html5" />
+                                <asp:ListItem Text="Image" Value="image" />
+                                <asp:ListItem Text="Text" Value="text" />
+                                <asp:ListItem Text="Video" Value="video" />
+                            </asp:DropDownList>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+                <asp:Label ID="Label6" runat="server" Text="Resource:"></asp:Label>
+                <asp:FileUpload ID="fileBannerUploadE" runat="server" CssClass="form-control" />
+                <asp:CustomValidator ID="CustomValidator1" runat="server" ControlToValidate="fileBannerUploadE"
+                    ClientValidationFunction="validateFile" ErrorMessage="Invalid file type or size exceeded 5MB"
+                    Display="Dynamic" ForeColor="Red" />
+
+                <script type="text/javascript">
+                    function validateFile(sender, args) {
+                        var fileInput = document.getElementById('<%= fileBannerUploadE.ClientID %>');
+                        var filePath = fileInput.value;
+                        var fileSize = fileInput.files[0].size / 1024 / 1024;
+
+                        var allowedExtensions = /(\.html|\.htm|\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.tiff|\.webp|\.txt|\.mp4|\.avi|\.mkv|\.mov|\.wmv|\.zip)$/i;
+
+                        if (!allowedExtensions.exec(filePath)) {
+                            args.IsValid = false;
+                            alert("Invalid file type. Only HTML, Image, Text, and Video files are allowed.");
+                            return;
+                        }
+
+                        if (fileSize > 5) {
+                            args.IsValid = false;
+                            alert("File size exceeds the 5MB limit.");
+                            return;
+                        }
+
+                        args.IsValid = true;
+                    }
+                </script>
+
+                <hr />
+                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <ContentTemplate>
+                        <asp:TextBox ID="PointsE" runat="server" CssClass="form-control" Placeholder="The website link this banner points to *" MaxLength="100" />
+                        <br />
+                        <div class="form-group">
+                            <asp:Label ID="Label7" runat="server" Text="Target:"></asp:Label>
+                            <asp:DropDownList ID="TargetDDL" runat="server" CssClass="form-control">
+                                <asp:ListItem Text="-Select-" Selected="True" Value="0" />
+                                <asp:ListItem Text="Open in New Tab" Value="_blank" />
+                                <asp:ListItem Text="Open in Same Tab" Value="_self" />
+                                <asp:ListItem Text="Open in Parent Frame" Value="_parent" />
+                                <asp:ListItem Text="Open in Full Window" Value="_top" />
+                            </asp:DropDownList>
+                        </div>
+                        <div class="form-group text-center">
+                            <asp:Label ID="ErrE" runat="server" Height="15px" BackColor="Transparent" Text="" ForeColor="Red" Font-Size="Smaller"></asp:Label>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <div class="form-group text-left">
+                    <asp:Button ID="EditBtn" runat="server" CssClass="btn-primary" Text="Update Banner" OnClick="EditBtn_Click" />
                 </div>
             </div>
         </div>

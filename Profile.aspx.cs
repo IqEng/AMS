@@ -37,7 +37,14 @@ namespace AMS
                     DName = Kripta.Decrypt(userin4ck["dname"].Trim(), "PPA4XCyfPMBrVASxNr/8A").ToString().Trim();
                     profileName.Text = DName;
                     AId = Kripta.Decrypt(userin4ck["aId"].Trim(), "PPA4XCyfPMBrVASxNr/8A").ToString().Trim();
-                    profileSupport.Text = AId;
+                    if(AId == "1")
+                    {
+                        profileSupport.Text = "IQ - Digital Marketing";
+                    }
+                    else
+                    {
+                        profileSupport.Text = "Squared - Digital Marketing";
+                    }
                     Address = Kripta.Decrypt(userin4ck["addr"].Trim(), "PPA4XCyfPMBrVASxNr/8A").ToString().Trim();
                     profileAddress.Text = Address;
                     Type = Kripta.Decrypt(userin4ck["type"].Trim(), "PPA4XCyfPMBrVASxNr/8A").ToString().Trim();

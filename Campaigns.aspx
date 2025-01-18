@@ -72,6 +72,9 @@
                                         <ItemTemplate>
                                             <span style="background-color: transparent;" title='<%# Eval("StartDate") %>'><%# Eval("StartDate") %></span>
                                         </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:TextBox ID="txtUStartDate" runat="server" Enabled="false" CssClass="form-control" ForeColor="Black" Text='<%# Eval("StartDate") %>' SelectedValue='<%# Eval("StartDate") %>'></asp:TextBox>
+                                        </EditItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="End Date" HeaderStyle-CssClass="sortable">
                                         <ItemTemplate>

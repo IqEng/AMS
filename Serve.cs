@@ -751,6 +751,53 @@ namespace AMS
                 con.Close();
             }
         }
+        public string updateBanner(string spname, string filenme, int BannerId, string BannerTypeId, string txtBannerLinkVlu, string Target, int UserId)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlTransaction trn = con.BeginTransaction();
+
+                SqlCommand cmd = new SqlCommand("updateBannerDetailsById", con, trn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@BannerId", SqlDbType.Int).Value = BannerId;
+                cmd.Parameters.Add("@BannerTypeId", SqlDbType.Char).Value = BannerTypeId.Trim();
+                cmd.Parameters.Add("@FileName", SqlDbType.Char).Value = filenme;
+                cmd.Parameters.Add("@BannerLink", SqlDbType.Char).Value = txtBannerLinkVlu.Trim();
+                cmd.Parameters.Add("@Target", SqlDbType.Char).Value = Target.Trim();
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = UserId;
+
+                try
+                {
+                    int cunt = cmd.ExecuteNonQuery();
+                    if (cunt > 0)
+                    {
+                        trn.Commit();
+                        return "Banner has been updated successfully.";
+                    }
+                    else
+                    {
+                        trn.Rollback();
+                        return "Banner update process unsuccessful.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    trn.Rollback();
+                    return ex.Message + " - " + "Operation unsuccessful.";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message + " - " + "Banner update process unsuccessful.";
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         public string insertWebsite(string spname, string Name, string WebsiteUrl, decimal budget, string TargetFrame, int UserId)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
@@ -965,6 +1012,42 @@ namespace AMS
                 con.Close();
             }
         }
+        public DataTable getBannerByAdvertiserId(string spname, int UserId)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(spname, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@AdvertiserId", SqlDbType.Int).Value = UserId;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                dr.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else
+                {
+                    DataTable dtx = new DataTable();
+                    return dtx;
+                }
+            }
+            catch
+            {
+                DataTable dtx = new DataTable();
+                return dtx;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         public DataTable getWebsiteDetailsById(string spname, int webid)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
@@ -1011,6 +1094,42 @@ namespace AMS
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.Add("@ZoneId", SqlDbType.Int).Value = zid;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                dr.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else
+                {
+                    DataTable dtx = new DataTable();
+                    return dtx;
+                }
+            }
+            catch
+            {
+                DataTable dtx = new DataTable();
+                return dtx;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public DataTable getBannerDetailsById(string spname, int zid)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(spname, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@BannerId", SqlDbType.Int).Value = zid;
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
