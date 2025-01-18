@@ -631,7 +631,7 @@ namespace AMS
                 {
                     if (website.Selected)
                     {
-                        result = InsertRecord(filenme, BannerDDL.SelectedValue.Trim(), BannerTypeDDL.SelectedValue.Trim(), PointsE.Text.Trim(), TargetDDL.SelectedValue.Trim());
+                        result = UpdateRecord(filenme, BannerDDL.SelectedValue.Trim(), BannerTypeDDL.SelectedValue.Trim(), PointsE.Text.Trim(), TargetDDL.SelectedValue.Trim());
                     }
                 }
 

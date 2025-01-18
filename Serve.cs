@@ -1724,7 +1724,7 @@ namespace AMS
                 SqlCommand cmd = new SqlCommand(spname, con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add("@Email", SqlDbType.Int).Value = Email;
+                cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = Email;
 
                 SqlDataReader dr = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
