@@ -5,7 +5,8 @@
         class="blurred-background">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <br />
-        <asp:HiddenField ID="Idn" runat="server" Value="InitialValue" /><asp:HiddenField ID="CamZne" runat="server" Value="" />
+        <asp:HiddenField ID="Idn" runat="server" Value="InitialValue" />
+        <asp:HiddenField ID="CamZne" runat="server" Value="" />
         <asp:UpdateProgress ID="UpdateProgress7" runat="server" AssociatedUpdatePanelID="UpdatePanel7">
             <ProgressTemplate>
                 <div style="position: fixed; left: 0%; top: 0%; z-index: 999; height: 100%; width: 100%; border-style: none; background-color: Black; filter: alpha(opacity=60); opacity: 0.3; -moz-opacity: 0.5;">
@@ -114,7 +115,7 @@
                     <ContentTemplate>
                         <div class="form-group">
                             <asp:Label ID="Label9" runat="server" Text="Banner:" />
-                            <asp:ListBox ID="BannerDDL" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="BannerDDL_SelectedIndexChanged"></asp:ListBox>
+                            <asp:DropDownList ID="BannerDDL" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="BannerDDL_SelectedIndexChanged"></asp:DropDownList>
                         </div>
                         <br />
                         <div class="form-group">
