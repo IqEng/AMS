@@ -47,7 +47,8 @@ namespace AMS
                             TargetFrame = row["TargetFrame"].ToString().Trim();
                             Priority = row["Priority"].ToString().Trim();
                         }
-                        string mask = Kripta.Encrypt(zoneId.Trim(), "mNwg0rIP8");
+                        //string mask = Kripta.Encrypt(zoneId.Trim(), "mNwg0rIP8");
+                        string mask = Kripta.Encrypt(BannerId.Trim(), "mNwg0rIP8");
                         string urlEncodedZoneId = HttpUtility.UrlEncode(mask);
                         mask = urlEncodedZoneId;
 
