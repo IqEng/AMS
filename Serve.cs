@@ -210,6 +210,42 @@ namespace AMS
                 con.Close();
             }
         }
+        public DataTable getDetailsByBannerId(string spname, int BannerId)
+        {
+            SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(spname, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@BannerId", SqlDbType.Int).Value = BannerId;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                dr.Close();
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt;
+                }
+                else
+                {
+                    DataTable dtx = new DataTable();
+                    return dtx;
+                }
+            }
+            catch
+            {
+                DataTable dtx = new DataTable();
+                return dtx;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         public DataTable getDetailsByZoneId(string spname, int ZoneId)
         {
             SqlConnection con = new SqlConnection(AuthClass.Getconstring().ToString());

@@ -18,19 +18,20 @@ namespace AMS
             {
                 string mask = Request.QueryString["zoneId"];
                 mask = mask.Replace(" ", "+");
-                zoneId = Kripta.Decrypt(mask.Trim(), "mNwg0rIP8");
+                zoneId = Kripta.Decrypt(mask.Trim(), "mNwg0rIP8");//actually the banner id
 
                 if (zoneId != null)
                 {
                     DataTable dt = new DataTable();
                     Serve apir = new Serve();
-                    dt = apir.getDetailsByZoneId("getDetailsByZoneId", Convert.ToInt16(zoneId));
+                    dt = apir.getDetailsByBannerId("getDetailsByBannerId", Convert.ToInt16(zoneId));
 
                     if (dt.Rows.Count > 0)
                     {
                         foreach (DataRow row in dt.Rows)
                         {
-                            BannerLink = row["BannerLink"].ToString().Trim(); Target = row["Target"].ToString().Trim();
+                            BannerLink = row["BannerLink"].ToString().Trim();
+                            Target = row["Target"].ToString().Trim();
                             BannerId = row["Id"].ToString().Trim();
                             TargetFrame = row["TargetFrame"].ToString().Trim();
                         }
